@@ -74,7 +74,7 @@
         android:layout_width="@dimen/len_52"
         android:layout_height="@dimen/len_52"
         android:layout_marginEnd="@dimen/len_16"
-        android:layout_marginBottom="@dimen/len_88"
+        android:layout_marginBottom="135dp"
         android:padding="@dimen/len_20"
         android:src="@drawable/ic_group_add"
         android:tint="@color/white"
@@ -82,6 +82,23 @@
         app:gBackgroundColor="@color/colorAccent"
         app:layout_anchor="@id/lay_container"
         app:layout_anchorGravity="bottom|end" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/navigation"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/len_52"
+        android:layout_gravity="bottom"
+        android:background="@color/white"
+        android:elevation="@dimen/len_4"
+        android:outlineProvider="bounds"
+        android:translationZ="@dimen/len_8"
+        app:itemIconTint="@color/text_nav"
+        app:itemTextColor="@color/text_nav"
+        app:menu="@menu/navigation_items"
+        tools:visibility="invisible"
+        >
+
+    </com.google.android.material.bottomnavigation.BottomNavigationView>
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
