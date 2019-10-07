@@ -2,8 +2,10 @@ package com.example.im2;
 
 import android.media.Image;
 import android.view.Gravity;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.AnticipateOvershootInterpolator;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,13 +18,21 @@ import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.ViewTarget;
 import com.example.common.APP.Activity;
 import com.example.im2.frags.main.ActiveFragment;
+import com.example.im2.frags.main.ContactFragment;
+import com.example.im2.frags.main.GroupFragment;
+import com.example.im2.helper.Navhelper;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import net.qiujuer.genius.ui.Ui;
+import net.qiujuer.genius.ui.widget.FloatActionButton;
 
 import butterknife.BindView;
 import butterknife.OnClick;
 
 
-public class MainActivity extends Activity implements BottomNavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends Activity
+        implements BottomNavigationView.OnNavigationItemSelectedListener,
+        Navhelper.OnTabChangedListener<Integer> {
 
     @BindView(R.id.txt_title)
     TextView mTitle;
@@ -33,9 +43,13 @@ public class MainActivity extends Activity implements BottomNavigationView.OnNav
     @BindView(R.id.appbar)
     View mLayAppbar;
 
+    @BindView(R.id.btn_action)
+    FloatActionButton mAction;
+
     @BindView(R.id.navigation)
     BottomNavigationView mNavigation;
 
+    private Navhelper<Integer> mNavHelper;
 
     @Override
     protected int getContentLayoutId() {
@@ -46,14 +60,23 @@ public class MainActivity extends Activity implements BottomNavigationView.OnNav
     protected void initData() {
         super.initData();
 
+
+        // 初始化
+        Menu menu = mNavigation.getMenu();
+        menu.performIdentifierAction(R.id.action_home,0);
     }
 
     @Override
     protected void initWidget() {
         super.initWidget();
 
+        mNavHelper = new Navhelper<Integer>(getSupportFragmentManager(), R.id.lay_container,this,this);
+        mNavHelper.add(R.id.action_home,new Navhelper.Tab<>(ActiveFragment.class, R.string.title_home))
+                .add(R.id.action_contact,new Navhelper.Tab<>(ContactFragment.class, R.string.title_contact))
+                .add(R.id.action_group,new Navhelper.Tab<>(GroupFragment.class, R.string.title_group));
         //添加监听
         mNavigation.setOnNavigationItemSelectedListener(this);
+
 
 
         Glide.with(this)
@@ -90,12 +113,11 @@ public class MainActivity extends Activity implements BottomNavigationView.OnNav
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
 
-        if (menuItem.getItemId() == R.id.action_home){
+
+/*        if (menuItem.getItemId() == R.id.action_home){
             mTitle.setText(R.string.title_home);
 
             ActiveFragment activeFragment = new ActiveFragment();
-
-
             if(isFirst){
                 //事务
                 getSupportFragmentManager()
@@ -106,7 +128,36 @@ public class MainActivity extends Activity implements BottomNavigationView.OnNav
             }
 
         }
+        return true;*/
+        return mNavHelper.performClickMenu(menuItem.getItemId());
+    }
 
-        return true;
+    @Override
+    public void onTabChanged(Navhelper.Tab<Integer> newTab, Navhelper.Tab<Integer> oldTab) {
+        // 从额外字段取出我们的资源id
+        mTitle.setText(newTab.extra);
+
+        float transY = 0;
+        float rotation = 0;
+        if (newTab.extra.equals(R.string.title_home)){
+            transY = Ui.dipToPx(getResources(),76);
+        }else{
+            if (newTab.extra.equals(R.string.title_contact)){
+                mAction.setImageResource(R.drawable.ic_contact_add);
+                rotation = -360;
+            }
+            else {
+                mAction.setImageResource(R.drawable.ic_group_add);
+                rotation = 360;
+            }
+        }
+        mAction.animate()
+                .rotation(rotation)
+                .translationY(transY)
+                .setInterpolator(new AnticipateOvershootInterpolator(1))
+                .setDuration(480)
+                .start();
+
+
     }
 }

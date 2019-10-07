@@ -74,7 +74,7 @@
         android:layout_width="@dimen/len_52"
         android:layout_height="@dimen/len_52"
         android:layout_marginEnd="@dimen/len_16"
-        android:layout_marginBottom="135dp"
+        android:layout_marginBottom="68dp"
         android:padding="@dimen/len_20"
         android:src="@drawable/ic_group_add"
         android:tint="@color/white"
