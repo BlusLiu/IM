@@ -41,4 +41,5 @@ dependencies {
 
     implementation "com.jakewharton:butterknife:$butterknifeVersion"
     annotationProcessor "com.jakewharton:butterknife-compiler:$butterknifeVersion"
+    implementation project(path: ':lang')
 }
