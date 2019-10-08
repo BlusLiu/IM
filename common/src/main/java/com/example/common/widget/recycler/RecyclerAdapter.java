@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -30,8 +31,11 @@ public abstract class RecyclerAdapter<Data>
 
     /**
      * 构造函数模块
-     * @param listener
      */
+    public RecyclerAdapter(){
+        this(null);
+    }
+
     public RecyclerAdapter(AdapterListener<Data> listener){
         this(new ArrayList<Data>(), listener);
     }
@@ -40,6 +44,27 @@ public abstract class RecyclerAdapter<Data>
         this.mDataList = dataList;
         this.mListener = listener;
     }
+
+    /**
+     * 复写默认的布局类型返回
+     *
+     * @param position 坐标
+     * @return 类型，其实复写后返回的都是XML文件的ID
+     */
+    @Override
+    public int getItemViewType(int position) {
+        return getItemViewType(position, mDataList.get(position));
+    }
+
+    /**
+     * 得到布局的类型
+     *
+     * @param position 坐标
+     * @param data     当前的数据
+     * @return XML文件的ID，用于创建ViewHolder
+     */
+    @LayoutRes
+    protected abstract int getItemViewType(int position, Data data);
 
     /**
      * 创建一个ViewHolder
@@ -154,7 +179,29 @@ public abstract class RecyclerAdapter<Data>
 
         void onItenClick(RecyclerAdapter.ViewHolder holder, Data data);
 
+    }
 
+    /**
+     * 对回调的实现
+     * @param <Data>
+     */
+    public static abstract class AdapterListenerImpl<Data> implements AdapterListener<Data>{
+
+        @Override
+        public void onItenClick(ViewHolder holder, Data data) {
+
+        }
+    }
+
+    @Override
+    public void update(Data data, ViewHolder<Data> holder) {
+        int pos = holder.getAdapterPosition();
+        if (pos >= 0){
+
+            mDataList.remove(pos);
+            mDataList.add(pos, data);
+            notifyItemChanged(pos);
+        }
     }
 
     public abstract static class ViewHolder<Data> extends RecyclerView.ViewHolder{

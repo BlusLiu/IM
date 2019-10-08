@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.example.common.widget.SquareLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="1dp"
+    android:background="@color/white">
+    
+    <ImageView
+        android:id="@+id/im_image"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" 
+        android:contentDescription="@string/app_name"/>
+
+    <View
+
+        android:visibility="gone"
+        android:id="@+id/view_shade"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/black_alpha_112"/>
+
+    <CheckBox
+        android:visibility="gone"
+        android:layout_width="22dp"
+        android:layout_height="22dp"
+        android:button="@drawable/sel_cb_circle"
+        android:checkable="false"
+        android:layout_gravity="end"
+        android:drawablePadding="0dp"
+        android:padding="0dp"
+        android:layout_margin="2dp"/>
+</com.example.common.widget.SquareLayout>

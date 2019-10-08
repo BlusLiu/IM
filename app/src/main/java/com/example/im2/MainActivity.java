@@ -132,9 +132,14 @@ public class MainActivity extends Activity
         return mNavHelper.performClickMenu(menuItem.getItemId());
     }
 
+    /**
+     * 利用回调方法，对其tab进行操作
+     * @param newTab
+     * @param oldTab
+     */
     @Override
     public void onTabChanged(Navhelper.Tab<Integer> newTab, Navhelper.Tab<Integer> oldTab) {
-        // 从额外字段取出我们的资源id
+        // 从额外字段取出资源id
         mTitle.setText(newTab.extra);
 
         float transY = 0;
