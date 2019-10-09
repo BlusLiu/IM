@@ -42,6 +42,8 @@ public abstract class Fragment extends androidx.fragment.app.Fragment {
                 ((ViewGroup)mRoot.getParent()).removeView(mRoot);
             }
         }
+
+        initData();
         //return super.onCreateView(inflater, container, savedInstanceState);
         return mRoot;
     }

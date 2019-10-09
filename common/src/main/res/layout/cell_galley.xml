@@ -20,6 +20,7 @@
         android:background="@color/black_alpha_112"/>
 
     <CheckBox
+        android:id="@+id/cb_select"
         android:visibility="gone"
         android:layout_width="22dp"
         android:layout_height="22dp"
