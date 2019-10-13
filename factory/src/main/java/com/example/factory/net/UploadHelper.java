@@ -6,6 +6,7 @@ import android.util.Log;
 import com.alibaba.sdk.android.oss.OSS;
 import com.alibaba.sdk.android.oss.OSSClient;
 import com.alibaba.sdk.android.oss.common.auth.OSSCredentialProvider;
+import com.alibaba.sdk.android.oss.common.auth.OSSPlainTextAKSKCredentialProvider;
 import com.alibaba.sdk.android.oss.common.auth.OSSStsTokenCredentialProvider;
 import com.alibaba.sdk.android.oss.model.PutObjectRequest;
 import com.alibaba.sdk.android.oss.model.PutObjectResult;
@@ -30,7 +31,8 @@ public class UploadHelper {
     private static OSS getClient(){
         //String stsServer = "STS应用服务器地址，例如http://abc.com"
 
-        OSSCredentialProvider credentialProvider = new OSSStsTokenCredentialProvider("LTAI4FcEsA7dh2eyo5ayWbjD", "F5SrxWxDdqttfqu1GvIb5iSekFisLq>", "<StsToken.SecurityToken>");
+        OSSCredentialProvider credentialProvider = new OSSPlainTextAKSKCredentialProvider("LTAI4FcEsA7dh2eyo5ayWbjD", "F5SrxWxDdqttfqu1GvIb5iSekFisLq");
+        // 不同的验证请求需要的参数不同
 
         return new OSSClient(Factory.app(), ENDPOINT, credentialProvider);
 
