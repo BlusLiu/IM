@@ -6,12 +6,15 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
 import com.example.common.APP.Applocation;
 import com.example.common.widget.PotraitView;
+import com.example.factory.Factory;
+import com.example.factory.net.UploadHelper;
 import com.example.im2.R;
 import com.example.im2.frags.media.GalleryFragment;
 import com.yalantis.ucrop.UCrop;
@@ -73,10 +76,21 @@ public class UpdateInfoFragment extends com.example.common.APP.Fragment {
     }
 
     private void loadPortrait(Uri uri) {
+
         Glide.with(this.getContext())
                 .load(uri)
                 .asBitmap()
                 .centerCrop()
                 .into(mPortrait);
+
+        String localPath = uri.getPath();
+        Log.e("TAG", "loadPortrait: "+localPath );
+
+        Factory.runOnAsync(new Runnable() {
+            @Override
+            public void run() {
+                UploadHelper.uploadPortrait(localPath);
+            }
+        });
     }
 }

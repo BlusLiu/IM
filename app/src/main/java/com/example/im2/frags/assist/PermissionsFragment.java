@@ -5,16 +5,15 @@ import android.Manifest;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.example.common.APP.Applocation;
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+
 import com.example.im2.R;
 import com.example.im2.frags.media.GalleryFragment;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
@@ -22,6 +21,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import java.util.List;
 
 import pub.devrel.easypermissions.AfterPermissionGranted;
+import pub.devrel.easypermissions.AppSettingsDialog;
 import pub.devrel.easypermissions.EasyPermissions;
 
 /**
@@ -45,15 +45,31 @@ public class PermissionsFragment extends BottomSheetDialogFragment implements Ea
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View root =  inflater.inflate(R.layout.fragment_permissions, container, false);
+        root.findViewById(R.id.btn_submit)
+                .setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        requestPerm();
+                    }
+                });
         return root;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        refreshState(getView());
+    }
 
     /**
      * 刷新布局中图片的状态
      * @param root
      */
     private void refreshState(View root){
+
+        if (root == null)
+            return;
         Context context = getContext();
 
         root.findViewById(R.id.im_state_permission_network)
@@ -161,6 +177,26 @@ public class PermissionsFragment extends BottomSheetDialogFragment implements Ea
 
     @Override
     public void onPermissionsDenied(int requestCode, List<String> perms) {
+        // 用户自己设置
         Toast.makeText(getContext(),"失败", Toast.LENGTH_LONG);
+        if (EasyPermissions.somePermissionPermanentlyDenied(this, perms)) {
+            new AppSettingsDialog
+                    .Builder(this)
+                    .build()
+                    .show();
+        }
+    }
+
+    /**
+     * 权限申请的回调
+     * @param requestCode
+     * @param permissions
+     * @param grantResults
+     */
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        EasyPermissions.onRequestPermissionsResult(requestCode,permissions,grantResults,this);
     }
 }

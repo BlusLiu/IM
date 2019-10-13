@@ -10,14 +10,22 @@ import java.io.File;
  */
 public class Applocation extends Application {
 
+
+
     //单例？
-    private static Application instance;
+    private static Applocation instance;
+
+    public static Applocation getInstance() {
+        return instance;
+    }
 
     @Override
     public void onCreate() {
         super.onCreate();
         instance = this;
     }
+
+
 
     /**
      * 获取缓存文件夹地址
