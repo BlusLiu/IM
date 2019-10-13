@@ -6,9 +6,9 @@
     tools:context="com.example.im2.frags.main.ActiveFragment">
 
 
-    <com.example.common.widget.GalleyView
+    <com.example.common.widget.GalleryView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/galleyView"></com.example.common.widget.GalleyView>
+        android:id="@+id/galleryView"></com.example.common.widget.GalleryView>
 
 </FrameLayout>

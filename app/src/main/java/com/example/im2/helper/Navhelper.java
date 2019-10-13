@@ -86,6 +86,7 @@ public class Navhelper<T> {
             if (oldTab.fragment != null){
                 // 移除，加入缓存
                 ft.detach(oldTab.fragment);
+                //ft.remove(oldTab.fragment);
             }
         }
 

@@ -43,4 +43,6 @@ dependencies {
     implementation "com.jakewharton:butterknife:$butterknifeVersion"
     annotationProcessor "com.jakewharton:butterknife-compiler:$butterknifeVersion"
     implementation project(path: ':lang')
+
+    implementation "com.yalantis:ucrop:$rootProject.ext.ucropVersion"
 }

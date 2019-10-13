@@ -23,7 +23,7 @@
 
 
 
-        <ImageView
+        <com.example.common.widget.PotraitView
             android:id="@+id/im_portrait"
             android:layout_width="@dimen/len_40"
             android:layout_height="@dimen/len_40"

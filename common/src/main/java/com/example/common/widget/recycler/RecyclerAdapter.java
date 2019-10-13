@@ -75,6 +75,8 @@ public abstract class RecyclerAdapter<Data>
     @NonNull
     @Override
     public ViewHolder<Data> onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+
+
         // 得到LayoutInflater用于把xml初始化为view(对象)
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         // 把xml id为viewType的文件初始化为一个root view
@@ -93,7 +95,13 @@ public abstract class RecyclerAdapter<Data>
         // 进行界面注解绑定
         holder.unbinder = ButterKnife.bind(holder, root);
         holder.callback = this;
-        return null;
+
+
+        //这里的问题? 我炸了！！！！我返回了一个空值
+        return holder;
+
+
+
     }
 
 
@@ -151,10 +159,15 @@ public abstract class RecyclerAdapter<Data>
 
     public void replace(Collection<Data> dataList){
         mDataList.clear();
-        if (dataList != null && dataList.size() > 0){
-            mDataList.addAll(dataList);
-            notifyDataSetChanged();
-        }
+        if (dataList == null || dataList.size() == 0)
+            return;
+        mDataList.addAll(dataList);
+        notifyDataSetChanged();
+
+//        if (dataList != null && dataList.size() > 0){
+//            mDataList.addAll(dataList);
+//            notifyDataSetChanged();
+//        }
     }
 
     @Override
@@ -219,6 +232,10 @@ public abstract class RecyclerAdapter<Data>
          */
         void bind(Data data){
             this.mData = data;
+            boolean noForget = true;
+            //我去，又忘了
+            //这里需要调用方法
+            onBind(data);
         }
 
         /**

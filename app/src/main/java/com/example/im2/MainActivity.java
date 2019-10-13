@@ -17,6 +17,7 @@ import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.ViewTarget;
 import com.example.common.APP.Activity;
+import com.example.im2.activites.AccountActivity;
 import com.example.im2.frags.main.ActiveFragment;
 import com.example.im2.frags.main.ContactFragment;
 import com.example.im2.frags.main.GroupFragment;
@@ -97,9 +98,10 @@ public class MainActivity extends Activity
     }
 
     @OnClick(R.id.btn_action)
-    void onAddClick(){
-        Toast.makeText(this,"add", Toast.LENGTH_SHORT).show();
+    void onActionClick(){
+        AccountActivity.show(this);
     }
+
 
 
     // 理想情况为复用

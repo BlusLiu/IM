@@ -21,7 +21,7 @@
 
     <CheckBox
         android:id="@+id/cb_select"
-        android:visibility="gone"
+
         android:layout_width="22dp"
         android:layout_height="22dp"
         android:button="@drawable/sel_cb_circle"
