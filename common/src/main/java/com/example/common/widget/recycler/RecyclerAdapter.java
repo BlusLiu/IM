@@ -232,7 +232,7 @@ public abstract class RecyclerAdapter<Data>
          */
         void bind(Data data){
             this.mData = data;
-            boolean noForget = true;
+
             //我去，又忘了
             //这里需要调用方法
             onBind(data);

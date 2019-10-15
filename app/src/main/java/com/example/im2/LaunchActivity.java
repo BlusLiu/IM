@@ -13,6 +13,9 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.view.View;
 
+/**
+ * 初始化
+ */
 public class LaunchActivity extends Activity {
 
     @Override
