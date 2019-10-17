@@ -20,6 +20,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".activites.UserActivity"
+            android:label="@string/title_activity_user"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
             android:name=".LaunchActivity"
             android:label="@string/title_activity_launch"
             android:theme="@style/AppTheme.NoActionBar">
@@ -32,9 +36,7 @@
         <activity
             android:name=".activites.MainActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.Main">
-
-        </activity>
+            android:theme="@style/AppTheme.Main"></activity>
         <activity
             android:name=".activites.AccountActivity"
             android:screenOrientation="portrait"
