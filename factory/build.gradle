@@ -32,6 +32,13 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
     implementation project(path: ':common')
+    implementation project(path: ':lang')
     implementation "com.aliyun.dpa:oss-android-sdk:$rootProject.ext.ossVersion"
+
+
+
+    implementation "com.squareup.retrofit2:retrofit:$rootProject.ext.retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-gson:$rootProject.ext.retrofitVersion"
+    implementation "com.google.code.gson:gson:$rootProject.ext.gsonVersion"
 
 }
