@@ -20,6 +20,6 @@ public interface RemoteService {
      * @param model
      * @return
      */
-    @POST
+    @POST("account/register")
     Call<RspModel<AccountRspModel>> accountRefister(@Body RegisterModel model);
 }

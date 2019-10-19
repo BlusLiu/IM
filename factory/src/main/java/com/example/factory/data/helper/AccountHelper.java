@@ -1,5 +1,7 @@
 package com.example.factory.data.helper;
 
+import android.util.Log;
+
 import com.example.factory.R;
 import com.example.factory.data.DataSource;
 import com.example.factory.model.api.RspModel;
@@ -29,6 +31,7 @@ public class AccountHelper {
             public void onResponse(Call<RspModel<AccountRspModel>> call, Response<RspModel<AccountRspModel>> response) {
                 // 请求成功
                 RspModel<AccountRspModel> rspModel = response.body();
+                //Log.d("user", "onResponse: "+rspModel.getResult().getUser().toString());
                 if (rspModel.success()){
                     AccountRspModel accountRspModel = rspModel.getResult();
 
@@ -37,7 +40,9 @@ public class AccountHelper {
                         // TODO 缓存绑定
                         callback.onDataLoaded(user);
                     }else {
+                        callback.onDataLoaded(accountRspModel.getUser());
                         bindPush(callback);
+
                     }
 
                 }else {
