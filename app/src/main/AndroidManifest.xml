@@ -19,6 +19,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+        <receiver android:name=".MessageRecevier"
+            android:enabled="true"
+            android:exported="true"
+            android:permission="1000">
+
+            <intent-filter>
+                <action android:name="com.igexin.sdk.action.${GETUI_APP_ID}"/>
+            </intent-filter>
+        </receiver>
+
+
         <activity
             android:name=".activites.UserActivity"
             android:label="@string/title_activity_user"

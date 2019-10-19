@@ -6,6 +6,7 @@ import androidx.annotation.StringRes;
 import com.example.common.APP.Applocation;
 import com.example.factory.data.DataSource;
 import com.example.factory.model.api.RspModel;
+import com.example.factory.persistence.Account;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -132,4 +133,10 @@ public class Factory {
     public static void dispatchPush(String message) {
         // TODO
     }
+
+    public static void setup(){
+        Account.load(app());
+    }
+
+
 }
