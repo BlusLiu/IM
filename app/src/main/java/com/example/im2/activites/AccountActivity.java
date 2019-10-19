@@ -63,7 +63,7 @@ public class AccountActivity extends Activity implements AccountTrigger {
                         Drawable drawable = resource.getCurrent();
 
                         drawable = DrawableCompat.wrap(drawable);
-                        drawable.setColorFilter(UiCompat.getColor(getResources(), R.color.colorAccent), PorterDuff.Mode.SCREEN);
+                        //drawable.setColorFilter(UiCompat.getColor(getResources(), R.color.colorAccent), PorterDuff.Mode.SCREEN);
 
                         this.view.setImageDrawable(drawable);
                     }

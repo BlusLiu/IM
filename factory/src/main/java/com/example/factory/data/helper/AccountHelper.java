@@ -2,6 +2,7 @@ package com.example.factory.data.helper;
 
 import android.util.Log;
 
+import com.example.factory.Factory;
 import com.example.factory.R;
 import com.example.factory.data.DataSource;
 import com.example.factory.model.api.RspModel;
@@ -40,14 +41,13 @@ public class AccountHelper {
                         // TODO 缓存绑定
                         callback.onDataLoaded(user);
                     }else {
-                        callback.onDataLoaded(accountRspModel.getUser());
                         bindPush(callback);
 
                     }
 
                 }else {
                     // TODO 服务器错误callback.onDataNotLoaded(R.String.data_rsp_error_service);
-                    callback.onDataNotLoaded(R.string.data_rsp_error_service);
+                    Factory.decodeRspCode(rspModel, callback);
                 }
             }
 
@@ -79,5 +79,6 @@ public class AccountHelper {
      */
     public static void bindPush(final DataSource.Callback<User> callback){
         // TODO 绑定
+        callback.onDataNotLoaded(R.string.app_name);
     }
 }
