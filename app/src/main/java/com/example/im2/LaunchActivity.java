@@ -5,11 +5,13 @@ import android.animation.AnimatorListenerAdapter;
 import android.animation.ArgbEvaluator;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
+import android.content.IntentFilter;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import com.example.common.APP.Activity;
 import com.example.factory.persistence.Account;
+import com.example.im2.activites.AccountActivity;
 import com.example.im2.activites.MainActivity;
 import com.example.im2.frags.assist.PermissionsFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -31,6 +33,8 @@ import net.qiujuer.genius.ui.compat.UiCompat;
 public class LaunchActivity extends Activity {
 
     private ColorDrawable mColorDrawable;
+    private IntentFilter filter;
+    private MessageRecevier messageRecevier;
 
     @Override
     protected int getContentLayoutId() {
@@ -57,6 +61,11 @@ public class LaunchActivity extends Activity {
     protected void initData() {
         super.initData();
 
+        // xian's显式注册一下?
+        filter = new IntentFilter();
+        filter.addAction("com.igexin.sdk.action.4qJyoiM47wAcgoGeMwO4G8");
+        messageRecevier = new MessageRecevier();
+        registerReceiver(messageRecevier, filter);
         // 动画进入到50%，等待PushId获取到
         startAnim(0.5f, new Runnable() {
             @Override
@@ -67,9 +76,20 @@ public class LaunchActivity extends Activity {
     }
 
     private void waitPushReceiverId(){
-        if (!TextUtils.isEmpty(Account.getPushId())){
-            skip();
-            return;
+        if (Account.isLogin()){
+            // 判断是否绑定
+            // 如果没有绑定等待广播接收器绑定
+            if (Account.isBind()){
+                skip();
+                return;
+            }
+        }else{
+            // 没有登陆
+            // 如果拿到了PUSHid，没有登陆是不能绑定的
+            if (!TextUtils.isEmpty(Account.getPushId())){
+                skip();
+                return;
+            }
         }
 
         getWindow().getDecorView()
@@ -95,7 +115,11 @@ public class LaunchActivity extends Activity {
 
     private void reallySkip(){
         if (PermissionsFragment.haveAll(this, getSupportFragmentManager())) {
-            MainActivity.show(this);
+            if (Account.isLogin()){
+                MainActivity.show(this);
+            }else {
+                AccountActivity.show(this);
+            }
             finish();
         }
     }
@@ -138,4 +162,11 @@ public class LaunchActivity extends Activity {
             return object.mColorDrawable.getColor();
         }
     };
+
+    // 这取消注册
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(messageRecevier);
+    }
 }

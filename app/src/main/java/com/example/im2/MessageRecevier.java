@@ -3,6 +3,7 @@ package com.example.im2;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -17,14 +18,16 @@ import com.igexin.sdk.PushConsts;
  * @Date: Create in 19:32 2019/10/19
  */
 public class MessageRecevier extends BroadcastReceiver {
-    private static final String TAG = MessageRecevier.class.getSimpleName();
+    //private static final String TAG = MessageRecevier.class.getSimpleName();
+    private static final String TAG = "GETUI_RECEVIER!!";
+
+
     @Override
     public void onReceive(Context context, Intent intent) {
         if (intent == null)
             return;
 
         Bundle bundle = intent.getExtras();
-
         switch (bundle.getInt(PushConsts.CMD_ACTION)){
             case PushConsts.GET_CLIENTID:{
 
@@ -50,7 +53,9 @@ public class MessageRecevier extends BroadcastReceiver {
     }
 
     private void onClientInit(String cid){
+        // 设置设备ID
         Account.setPushId(cid);
+        // 没有登陆是不能绑定的
         if (Account.isLogin()){
             AccountHelper.bindPush(null);
         }

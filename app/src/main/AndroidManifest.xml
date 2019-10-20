@@ -25,9 +25,11 @@
             android:exported="true"
             android:permission="1000">
 
+            <!--  这里的隐式配置有点问题
             <intent-filter>
                 <action android:name="com.igexin.sdk.action.${GETUI_APP_ID}"/>
             </intent-filter>
+            -->
         </receiver>
 
 

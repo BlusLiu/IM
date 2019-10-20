@@ -37,7 +37,7 @@ implements LoginContract.View{
 
     @BindView(R.id.loading)
     Loading mLoading;
-    @BindView(R.id.btn_submit)
+    @BindView(R.id.btn_submit_login)
     Button mSubmit;
     private AccountTrigger accountTrigger;
 
@@ -58,12 +58,6 @@ implements LoginContract.View{
     }
 
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_login, container, false);
-    }
 
     @Override
     protected int getContentLayoutId() {
@@ -76,7 +70,7 @@ implements LoginContract.View{
         getActivity().finish();
     }
 
-    @OnClick(R.id.btn_submit)
+    @OnClick(R.id.btn_submit_login)
     void onSubmitClick(){
         String phone = mPhone.getText().toString();
         String password = mPassword.getText().toString();
@@ -85,7 +79,7 @@ implements LoginContract.View{
         mPresenter.login(phone, password);
     }
 
-    @OnClick(R.id.text_go_login)
+    @OnClick(R.id.text_go_register)
     void onRegisterClick(){
         accountTrigger.triggerView();
     }

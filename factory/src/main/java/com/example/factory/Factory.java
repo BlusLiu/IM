@@ -7,8 +7,11 @@ import com.example.common.APP.Applocation;
 import com.example.factory.data.DataSource;
 import com.example.factory.model.api.RspModel;
 import com.example.factory.persistence.Account;
+import com.example.factory.utils.DBFlowExclusionStrategy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.raizlabs.android.dbflow.config.FlowConfig;
+import com.raizlabs.android.dbflow.config.FlowManager;
 
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
@@ -31,7 +34,7 @@ public class Factory {
         gson = new GsonBuilder()
                 .setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS")
                 // TODO 设置一个过滤器，数据库级别的MODEL不进行JSOn转换
-                .setExclusionStrategies()
+                .setExclusionStrategies(new DBFlowExclusionStrategy())
                 .create();
     }
 
@@ -45,6 +48,39 @@ public class Factory {
 
     public static Gson getGson() {
         return instance.gson;
+    }
+
+
+    private static void decodeRspCode(@StringRes final int resId,
+                                      final DataSource.FailedCallback callback) {
+        if (callback != null)
+            callback.onDataNotLoaded(resId);
+    }
+
+
+    /**
+     * 收到账户退出的消息需要进行账户退出重新登录
+     */
+    private void logout() {
+
+    }
+
+
+    /**
+     * 处理推送来的消息
+     *
+     * @param message 消息
+     */
+    public static void dispatchPush(String message) {
+        // TODO
+    }
+
+    public static void setup(){
+        FlowManager.init(new FlowConfig.Builder(app())
+        .openDatabasesOnInit(true)
+        .build());
+
+        Account.load(app());
     }
 
     /**
@@ -109,34 +145,5 @@ public class Factory {
                 break;
         }
     }
-
-    private static void decodeRspCode(@StringRes final int resId,
-                                      final DataSource.FailedCallback callback) {
-        if (callback != null)
-            callback.onDataNotLoaded(resId);
-    }
-
-
-    /**
-     * 收到账户退出的消息需要进行账户退出重新登录
-     */
-    private void logout() {
-
-    }
-
-
-    /**
-     * 处理推送来的消息
-     *
-     * @param message 消息
-     */
-    public static void dispatchPush(String message) {
-        // TODO
-    }
-
-    public static void setup(){
-        Account.load(app());
-    }
-
 
 }

@@ -1,5 +1,10 @@
 package com.example.factory.model.db;
 
+import com.raizlabs.android.dbflow.annotation.Column;
+import com.raizlabs.android.dbflow.annotation.PrimaryKey;
+import com.raizlabs.android.dbflow.annotation.Table;
+import com.raizlabs.android.dbflow.structure.BaseModel;
+
 import java.util.Date;
 
 /**
@@ -7,18 +12,32 @@ import java.util.Date;
  * @Description:
  * @Date: Create in 13:47 2019/10/19
  */
-public class User {
+@Table(database = AppDatabase.class)
+public class User extends BaseModel {
 
+
+    @PrimaryKey
     private String id;
+    @Column
     private String name;
+    @Column
     private String phone;
+    @Column
     private String portrait;
+    @Column
     private String alias;
+    @Column
     private String description;
+    // man = 1, woman = 0
+    @Column
     private int sex = 0;
+    @Column
     private Boolean isFollow = false;
+    @Column
     private int follows;
+    @Column
     private int following;
+    @Column
     private Date modifyAt;
 
     public String getId() {
@@ -77,7 +96,7 @@ public class User {
         this.sex = sex;
     }
 
-    public Boolean getFollow() {
+    public Boolean isFollow() {
         return isFollow;
     }
 

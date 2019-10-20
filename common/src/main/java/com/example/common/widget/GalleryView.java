@@ -333,7 +333,7 @@ public class GalleryView extends RecyclerView {
                     .placeholder(R.color.green_200)// 默认颜色
                     .into(mPic);
 
-            Log.d("onBindpath",image.path);
+            //Log.d("onBindpath",image.path);
 
 
             mShade.setVisibility(image.isSelect? VISIBLE:INVISIBLE);
