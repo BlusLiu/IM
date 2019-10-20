@@ -3,6 +3,7 @@ package com.example.im2.activites;
 import android.content.Context;
 import android.content.Intent;
 import android.media.Image;
+import android.os.Bundle;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -19,6 +20,7 @@ import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.ViewTarget;
 import com.example.common.APP.Activity;
+import com.example.factory.persistence.Account;
 import com.example.im2.R;
 import com.example.im2.activites.AccountActivity;
 import com.example.im2.frags.assist.PermissionsFragment;
@@ -62,6 +64,19 @@ public class MainActivity extends Activity
      */
     public static void show(Context context){
         context.startActivity(new Intent(context, MainActivity.class));
+    }
+
+    // 返回false activity直接finish
+    @Override
+    protected boolean initArgs(Bundle bundle) {
+        if (Account.isComplete()){
+            return super.initArgs(bundle);
+        }else {
+            UserActivity.show(this);
+            // 自然销毁
+            return false;
+        }
+
     }
 
     @Override

@@ -58,7 +58,7 @@ public class Network {
                 .build();
         Retrofit.Builder builder = new Retrofit.Builder();
 
-        instance.retrofit = builder.baseUrl(Common.Constance.API_URL_HDU)
+        instance.retrofit = builder.baseUrl(Common.Constance.API_URL_308)
                 .client(client)
                 .addConverterFactory(GsonConverterFactory.create(Factory.getGson()))
                 .build();

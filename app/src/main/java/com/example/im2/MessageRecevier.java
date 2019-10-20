@@ -19,7 +19,7 @@ import com.igexin.sdk.PushConsts;
  */
 public class MessageRecevier extends BroadcastReceiver {
     //private static final String TAG = MessageRecevier.class.getSimpleName();
-    private static final String TAG = "GETUI_RECEVIER!!";
+    private static final String TAG = "MessageRecevier";
 
 
     @Override

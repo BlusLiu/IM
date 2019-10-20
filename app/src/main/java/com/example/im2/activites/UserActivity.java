@@ -1,6 +1,7 @@
 package com.example.im2.activites;
 
 
+import android.content.Context;
 import android.content.Intent;
 
 import com.example.common.APP.Activity;
@@ -12,6 +13,10 @@ import com.example.im2.frags.user.UpdateInfoFragment;
 
 public class UserActivity extends Activity {
     private Fragment mFragment;
+
+    public static void show(Context context){
+        context.startActivity(new Intent(context, UserActivity.class));
+    }
 
     @Override
     protected int getContentLayoutId() {
@@ -31,6 +36,7 @@ public class UserActivity extends Activity {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        //super.onActivityResult(requestCode, resultCode, data);
         mFragment.onActivityResult(requestCode, resultCode, data);
     }
 }

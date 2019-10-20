@@ -12,6 +12,8 @@ public class Common {
         String REGEX_MOBILE = "[1][3,4,5,6,7,8][0-9]{9}$";
         String API_URL_308 = "http://192.168.1.102:8889/api/";
         String API_URL_HDU = "http://10.66.116.120:8889/api/";
+        String API_URL_ME = "http://192.168.43.224:8889/api/";
+
 
     }
 }

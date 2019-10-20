@@ -3,6 +3,7 @@ package com.example.factory.persistence;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.example.factory.Factory;
 import com.example.factory.model.api.account.AccountRspModel;
@@ -53,6 +54,7 @@ public class Account {
 
     public static void setPushId(String pushId){
         Account.pushId = pushId;
+        Log.d("pushid", "setPushId: "+pushId);
         Account.save(Factory.app());
     }
 
