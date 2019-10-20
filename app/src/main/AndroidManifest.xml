@@ -37,7 +37,7 @@
             android:name=".activites.UserActivity"
             android:label="@string/title_activity_user"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.TransStatusBar"></activity>
         <activity
             android:name=".LaunchActivity"
             android:label="@string/title_activity_launch"

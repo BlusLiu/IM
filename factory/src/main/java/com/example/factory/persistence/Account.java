@@ -68,7 +68,14 @@ public class Account {
     }
 
     public static boolean isComplete(){
-        return isLogin();
+        if (isLogin()){
+            User user = getUser();
+            return !TextUtils.isEmpty(user.getDescription())
+                    && !TextUtils.isEmpty(user.getPortrait())
+                    && user.getSex() != 0;
+        }
+        // 未登录，返回信息不完全
+        return false;
     }
 
     public static Boolean isBind(){

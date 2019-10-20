@@ -50,7 +50,8 @@ public class Network {
                             builder.addHeader("token",Account.getToken());
                         }
 
-                        builder.addHeader("Content-Type","appliction/json");
+                        // application拼错了...还不如不写，自动生成
+                        builder.addHeader("Content-Type","application/json");
                         Request newRequest = builder.build();
                         return chain.proceed(newRequest);
                     }
@@ -58,7 +59,7 @@ public class Network {
                 .build();
         Retrofit.Builder builder = new Retrofit.Builder();
 
-        instance.retrofit = builder.baseUrl(Common.Constance.API_URL_308)
+        instance.retrofit = builder.baseUrl(Common.Constance.API_URL_HDU)
                 .client(client)
                 .addConverterFactory(GsonConverterFactory.create(Factory.getGson()))
                 .build();
