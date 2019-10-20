@@ -152,8 +152,9 @@ public class UpdateInfoFragment
 
     @Override
     public void updateSucceed() {
-        // MainActivity.show(getContext());
-        // getActivity().finish();
+         MainActivity.show(getContext());
+        Applocation.showToast("修改成功");
+         getActivity().finish();
     }
 
     @Override

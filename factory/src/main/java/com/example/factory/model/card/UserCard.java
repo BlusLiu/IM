@@ -119,7 +119,7 @@ public class UserCard {
             user.setName(name);
             user.setPortrait(portrait);
             user.setPhone(phone);
-            user.setDescription(desc);
+            user.setDesc(desc);
             user.setSex(sex);
             user.setFollow(isFollow);
             user.setFollows(follows);

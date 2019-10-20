@@ -65,7 +65,7 @@ public class UpdateInfoPresenter
             @Override
             public void call() {
                 // 这里进行回调的时候一定就是主线程状态了
-                Applocation.showToast("ok");
+                view.updateSucceed();
             }
         });
     }

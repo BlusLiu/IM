@@ -138,7 +138,7 @@ public class LaunchActivity extends Activity {
         int endColor = (int)evaluator.evaluate(endProgress, mColorDrawable.getColor(), finalColor);
 
         ValueAnimator valueAnimator = ObjectAnimator.ofObject(this, property,evaluator, endColor);
-        valueAnimator.setDuration(2500);
+        valueAnimator.setDuration(1500);
         valueAnimator.setIntValues(mColorDrawable.getColor(), endColor);
 
         valueAnimator.addListener(new AnimatorListenerAdapter() {

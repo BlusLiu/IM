@@ -122,11 +122,11 @@ public class AccountHelper {
                 if (accountRspModel.isBind()){
                     // TODO 缓存绑定
                     Account.setBind(true);
+
                     if (callback != null)
                     callback.onDataLoaded(user);
                 }else {
                     bindPush(callback);
-
                 }
 
             }else {

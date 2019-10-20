@@ -7,6 +7,7 @@ import com.example.factory.model.api.RspModel;
 import com.example.factory.model.api.account.AccountRspModel;
 import com.example.factory.model.api.user.UserUpdateModel;
 import com.example.factory.model.card.UserCard;
+import com.example.factory.model.db.User;
 import com.example.factory.net.Network;
 import com.example.factory.net.RemoteService;
 
@@ -33,7 +34,8 @@ public class UserHelper {
                 if (rspModel.success()){
                     UserCard card = rspModel.getResult();
                     // 数据库的存储
-
+                    User user = card.build();
+                    user.save();
                     // 返回成功
                     callback.onDataLoaded(card);
 

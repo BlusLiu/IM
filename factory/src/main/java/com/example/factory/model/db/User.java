@@ -27,7 +27,7 @@ public class User extends BaseModel {
     @Column
     private String alias;
     @Column
-    private String description;
+    private String desc;
     // man = 1, woman = 0
     @Column
     private int sex = 0;
@@ -80,12 +80,12 @@ public class User extends BaseModel {
         this.alias = alias;
     }
 
-    public String getDescription() {
-        return description;
+    public String getDesc() {
+        return desc;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setDesc(String desc) {
+        this.desc = desc;
     }
 
     public int getSex() {
@@ -126,5 +126,22 @@ public class User extends BaseModel {
 
     public void setModifyAt(Date modifyAt) {
         this.modifyAt = modifyAt;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", phone='" + phone + '\'' +
+                ", portrait='" + portrait + '\'' +
+                ", alias='" + alias + '\'' +
+                ", desc='" + desc + '\'' +
+                ", sex=" + sex +
+                ", isFollow=" + isFollow +
+                ", follows=" + follows +
+                ", following=" + following +
+                ", modifyAt=" + modifyAt +
+                '}';
     }
 }

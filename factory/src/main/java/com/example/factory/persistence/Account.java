@@ -63,6 +63,7 @@ public class Account {
     }
 
     public static boolean isLogin(){
+
         return !TextUtils.isEmpty(userId)
                 && !TextUtils.isEmpty(token);
     }
@@ -70,7 +71,8 @@ public class Account {
     public static boolean isComplete(){
         if (isLogin()){
             User user = getUser();
-            return !TextUtils.isEmpty(user.getDescription())
+            Log.d("user_detail", user.toString());
+            return !TextUtils.isEmpty(user.getDesc())
                     && !TextUtils.isEmpty(user.getPortrait())
                     && user.getSex() != 0;
         }
@@ -90,6 +92,7 @@ public class Account {
     public static void login(AccountRspModel model){
         // 存储用户的token， id， 方便从数据库中查询
         Account.token = model.getToken();
+        Log.d("TOKEN", "login: "+token);;
         Account.account = model.getAccount();
         Account.userId = model.getUser().getId();
         save(Factory.app());
