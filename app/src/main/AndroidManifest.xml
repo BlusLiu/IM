@@ -19,8 +19,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity
+            android:name=".activites.SearchActivity"
+            android:label="@string/title_search"
+            android:theme="@style/AppTheme.TransStatusBar"
+            android:screenOrientation="portrait"></activity>
 
-        <receiver android:name=".MessageRecevier"
+        <receiver
+            android:name=".MessageRecevier"
             android:enabled="true"
             android:exported="true"
             android:permission="1000">
@@ -32,12 +38,11 @@
             -->
         </receiver>
 
-
         <activity
             android:name=".activites.UserActivity"
             android:label="@string/title_activity_user"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.TransStatusBar"></activity>
+            android:theme="@style/AppTheme.TransStatusBar" />
         <activity
             android:name=".LaunchActivity"
             android:label="@string/title_activity_launch"
@@ -51,7 +56,7 @@
         <activity
             android:name=".activites.MainActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.Main"></activity>
+            android:theme="@style/AppTheme.Main" />
         <activity
             android:name=".activites.AccountActivity"
             android:screenOrientation="portrait"

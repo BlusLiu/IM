@@ -33,6 +33,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import net.qiujuer.genius.ui.Ui;
 import net.qiujuer.genius.ui.widget.FloatActionButton;
 
+import java.util.Objects;
+
 import butterknife.BindView;
 import butterknife.OnClick;
 
@@ -123,12 +125,20 @@ public class MainActivity extends Activity
 
     @OnClick(R.id.im2_search)
     void onSerchMenuClick(){
-        Toast.makeText(this,"search", Toast.LENGTH_SHORT).show();
+        int type = Objects.equals(mNavHelper.getCurrentTab().extra, R.string.title_group)? SearchActivity.TYPE_GROUP : SearchActivity.TYPE_USER;
+
+        SearchActivity.show(this,type);
     }
 
     @OnClick(R.id.btn_action)
     void onActionClick(){
-        AccountActivity.show(this);
+        // 点击判断当前在人还是群
+        if (Objects.equals(mNavHelper.getCurrentTab().extra, R.string.title_group)){
+            //TODO 打开群创建界面
+        }else {
+            SearchActivity.show(this,SearchActivity.TYPE_USER);
+        }
+        //AccountActivity.show(this);
     }
 
 

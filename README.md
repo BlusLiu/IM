@@ -17,5 +17,5 @@ BUG汇总：
   - 数据请求格式有误
 - java.lang.NullPointerException: Attempt to invoke virtual method 'XXX' on a null object reference
    - 空指针异常，按理说是不会出现的错误，因为两个ID重名，而需要的ID未设置，则导致获取的View未空，而到下面调用方法时才报错
-
 - GitHubDesktop无修改更新记录，原来是新建同名项目修改BUG后没改DeskTop目录
+- background cant ... 后台无法允许从 8.0

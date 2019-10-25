@@ -19,6 +19,7 @@ public abstract class Fragment extends androidx.fragment.app.Fragment {
     protected View mRoot;
     protected Unbinder mRootUnbinder;
 
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
