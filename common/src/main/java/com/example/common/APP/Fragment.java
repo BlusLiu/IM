@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.example.common.widget.convention.PlaceHolderView;
+
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
@@ -18,7 +20,9 @@ import butterknife.Unbinder;
 public abstract class Fragment extends androidx.fragment.app.Fragment {
     protected View mRoot;
     protected Unbinder mRootUnbinder;
+    protected PlaceHolderView mPlaceHolderView;
 
+    protected boolean mIsFirstInitData = true;
 
     @Override
     public void onAttach(Context context) {
@@ -44,11 +48,24 @@ public abstract class Fragment extends androidx.fragment.app.Fragment {
             }
         }
 
-        initData();
+        //initData();
         //return super.onCreateView(inflater, container, savedInstanceState);
         return mRoot;
     }
 
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        if (mIsFirstInitData) {
+            // 触发一次以后就不会触发
+            mIsFirstInitData = false;
+            // 触发
+            onFirstInit();
+        }
+
+        // 当View创建完成后初始化数据
+        initData();
+    }
     /**
      * 当前界面资源文件的ID
      * @return id
@@ -64,6 +81,13 @@ public abstract class Fragment extends androidx.fragment.app.Fragment {
 
     }
 
+    /**
+     * 首次调用
+     */
+    protected void onFirstInit(){
+
+    }
+
     protected void initArgs(Bundle bundle){
 
     }
@@ -74,5 +98,9 @@ public abstract class Fragment extends androidx.fragment.app.Fragment {
      */
     public boolean onBackPressed(){
         return false;
+    }
+
+    public void setmPlaceHolderView(PlaceHolderView view){
+        this.mPlaceHolderView = view;
     }
 }

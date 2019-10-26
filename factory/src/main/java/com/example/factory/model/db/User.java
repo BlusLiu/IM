@@ -1,5 +1,6 @@
 package com.example.factory.model.db;
 
+import com.example.factory.model.Author;
 import com.raizlabs.android.dbflow.annotation.Column;
 import com.raizlabs.android.dbflow.annotation.PrimaryKey;
 import com.raizlabs.android.dbflow.annotation.Table;
@@ -13,7 +14,7 @@ import java.util.Date;
  * @Date: Create in 13:47 2019/10/19
  */
 @Table(database = AppDatabase.class)
-public class User extends BaseModel {
+public class User extends BaseModel implements Author {
 
 
     @PrimaryKey

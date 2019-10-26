@@ -24,12 +24,18 @@ public abstract class PresenterFragment<Presenter extends BaseContract.Presenter
 
     @Override
     public void showError(int Str) {
+        if (mPlaceHolderView != null){
+            mPlaceHolderView.triggerError(Str);
+        }else
         Applocation.showToast(Str);
     }
 
     @Override
     public void showLoading() {
         // TODO 显示一个loading
+        if (mPlaceHolderView != null){
+            mPlaceHolderView.triggerLoading();
+        }
     }
 
     @Override

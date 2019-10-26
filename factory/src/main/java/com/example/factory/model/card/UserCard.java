@@ -1,5 +1,6 @@
 package com.example.factory.model.card;
 
+import com.example.factory.model.Author;
 import com.example.factory.model.db.User;
 
 import java.util.Date;
@@ -9,7 +10,7 @@ import java.util.Date;
  * @Description:
  * @Date: Create in 18:59 2019/10/20
  */
-public class UserCard {
+public class UserCard implements Author {
     private String id;
     private String name;
     private String phone;

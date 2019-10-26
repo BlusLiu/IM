@@ -20,10 +20,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".activites.MessageActivity"
+            android:label="@string/title_activity_message"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
             android:name=".activites.SearchActivity"
             android:label="@string/title_search"
-            android:theme="@style/AppTheme.TransStatusBar"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.TransStatusBar" />
 
         <receiver
             android:name=".MessageRecevier"

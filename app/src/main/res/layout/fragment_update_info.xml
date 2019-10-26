@@ -30,7 +30,7 @@
             app:title="@string/label_update_info_tips"
             app:titleTextAppearance="@style/TextAppearance.AppCompat.Display1" />
 
-        <com.example.common.widget.PotraitView
+        <com.example.common.widget.PortraitView
             android:id="@+id/my_potrait"
             android:layout_width="@dimen/len_92"
             android:layout_height="@dimen/len_92"

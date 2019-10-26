@@ -6,8 +6,6 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.os.Bundle;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -17,9 +15,7 @@ import androidx.fragment.app.Fragment;
 import com.bumptech.glide.Glide;
 import com.example.common.APP.Applocation;
 import com.example.common.APP.PresenterFragment;
-import com.example.common.widget.PotraitView;
-import com.example.factory.Factory;
-import com.example.factory.net.UploadHelper;
+import com.example.common.widget.PortraitView;
 import com.example.factory.persenter.user.UpdateInfoContract;
 import com.example.factory.persenter.user.UpdateInfoPresenter;
 import com.example.im2.R;
@@ -44,7 +40,7 @@ public class UpdateInfoFragment
         implements UpdateInfoContract.View{
 
     @BindView(R.id.my_potrait)
-    PotraitView mPortrait;
+    PortraitView mPortrait;
 
     @BindView(R.id.im_sex)
     ImageView mSex;

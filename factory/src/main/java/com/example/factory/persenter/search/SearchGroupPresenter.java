@@ -1,6 +1,11 @@
 package com.example.factory.persenter.search;
 
+import com.example.factory.data.DataSource;
+import com.example.factory.data.helper.UserHelper;
+import com.example.factory.model.card.UserCard;
 import com.example.factory.presenter.BasePresenter;
+
+import java.util.List;
 
 /**
  * @Author: liuzhen
@@ -15,6 +20,12 @@ public class SearchGroupPresenter extends BasePresenter<SearchContract.GroupView
 
     @Override
     public void search(String content) {
+        start();
 
+        //这里可以优化
+        //Call call = searchCall;
+        //UserHelper.search(content, this);
     }
+
+
 }

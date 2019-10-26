@@ -105,6 +105,10 @@ public class Account {
                         .querySingle();
     }
 
+    public static String getUserId(){
+        return getUser().getId();
+    }
+
     public static String getToken(){
         return token;
     }

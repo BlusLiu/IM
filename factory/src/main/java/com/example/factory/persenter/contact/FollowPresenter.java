@@ -1,4 +1,4 @@
-package com.example.factory.persenter.search;
+package com.example.factory.persenter.contact;
 
 import com.example.factory.data.DataSource;
 import com.example.factory.data.helper.UserHelper;
@@ -8,34 +8,32 @@ import com.example.factory.presenter.BasePresenter;
 import net.qiujuer.genius.kit.handler.Run;
 import net.qiujuer.genius.kit.handler.runable.Action;
 
-import java.util.List;
-
 /**
  * @Author: liuzhen
  * @Description:
- * @Date: Create in 21:42 2019/10/25
+ * @Date: Create in 11:18 2019/10/26
  */
-public class SearchUserPresenter extends BasePresenter<SearchContract.UserView> implements SearchContract.Presenter, DataSource.Callback<List<UserCard>>{
-    public SearchUserPresenter(SearchContract.UserView view) {
+public class FollowPresenter extends BasePresenter<FollowContact.View> implements FollowContact.Presenter, DataSource.Callback<UserCard> {
+    public FollowPresenter(FollowContact.View view) {
         super(view);
     }
 
     @Override
-    public void search(String content) {
+    public void follow(String id) {
         start();
 
-        // 这里可以利用call优化一下
-        UserHelper.search(content, this);
+        UserHelper.follow(id, this);
     }
 
     @Override
-    public void onDataLoaded(final List<UserCard> userCards) {
-        final SearchContract.UserView view = getmView();
+    public void onDataLoaded(final UserCard userCard) {
+        final FollowContact.View view = getmView();
+
         if (view != null){
             Run.onUiAsync(new Action() {
                 @Override
                 public void call() {
-                    view.onSearchDone(userCards);
+                    view.onFollowSucceed(userCard);
                 }
             });
         }
@@ -43,7 +41,8 @@ public class SearchUserPresenter extends BasePresenter<SearchContract.UserView> 
 
     @Override
     public void onDataNotLoaded(final int num) {
-        final SearchContract.UserView view = getmView();
+        final FollowContact.View view = getmView();
+
         if (view != null){
             Run.onUiAsync(new Action() {
                 @Override
