@@ -1,12 +1,14 @@
 package com.example.factory.model.db;
 
 import com.example.factory.model.Author;
+import com.example.factory.utils.DiffUiDataCallback;
 import com.raizlabs.android.dbflow.annotation.Column;
 import com.raizlabs.android.dbflow.annotation.PrimaryKey;
 import com.raizlabs.android.dbflow.annotation.Table;
 import com.raizlabs.android.dbflow.structure.BaseModel;
 
 import java.util.Date;
+import java.util.Objects;
 
 /**
  * @Author: liuzhen
@@ -14,7 +16,7 @@ import java.util.Date;
  * @Date: Create in 13:47 2019/10/19
  */
 @Table(database = AppDatabase.class)
-public class User extends BaseModel implements Author {
+public class User extends BaseModel implements Author, DiffUiDataCallback.UiDataDiffer {
 
 
     @PrimaryKey
@@ -144,5 +146,23 @@ public class User extends BaseModel implements Author {
                 ", following=" + following +
                 ", modifyAt=" + modifyAt +
                 '}';
+    }
+
+
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, phone, portrait, alias, desc, sex, isFollow, follows, following, modifyAt);
+    }
+
+    @Override
+    public boolean isSame(Object o) {
+        User user = (User) o;
+        return this == o || Objects.equals(id, user.id);
+    }
+
+    @Override
+    public boolean isUiContentSame(Object old) {
+        return this == old || this.hashCode() == ((User)old).hashCode();
     }
 }

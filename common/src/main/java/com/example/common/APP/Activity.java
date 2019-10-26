@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.example.common.R2;
+import com.example.common.widget.convention.PlaceHolderView;
 
 import java.util.List;
 
@@ -16,6 +17,7 @@ import butterknife.ButterKnife;
  * Created by liuzhen on 2019/10/4
  */
 public abstract class Activity extends AppCompatActivity {
+    protected PlaceHolderView mPlaceHolderView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -24,9 +26,15 @@ public abstract class Activity extends AppCompatActivity {
         if (initArgs(getIntent().getExtras())){
             int layId = getContentLayoutId();
             setContentView(layId);
+            initBefore();
             initWidget();
             initData();
         }
+    }
+
+    // 在所有操作初始化之前
+    protected void initBefore(){
+
     }
 
     protected boolean initArgs(Bundle bundle){
@@ -79,4 +87,8 @@ public abstract class Activity extends AppCompatActivity {
         super.onBackPressed();
         finish();
     }
+    public void setmPlaceHolderView(PlaceHolderView view){
+        this.mPlaceHolderView = view;
+    }
+
 }

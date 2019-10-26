@@ -8,10 +8,13 @@ import com.example.factory.model.api.account.AccountRspModel;
 import com.example.factory.model.api.user.UserUpdateModel;
 import com.example.factory.model.card.UserCard;
 import com.example.factory.model.db.User;
+import com.example.factory.model.db.User_Table;
 import com.example.factory.net.Network;
 import com.example.factory.net.RemoteService;
 import com.example.factory.persenter.contact.FollowPresenter;
+import com.raizlabs.android.dbflow.sql.language.SQLite;
 
+import java.io.IOException;
 import java.util.List;
 
 import retrofit2.Call;
@@ -135,5 +138,41 @@ public class UserHelper {
                 callback.onDataNotLoaded(R.string.data_network_error);
             }
         });
+    }
+
+    public static User searchFirstOfLoc(String id){
+        return SQLite.select()
+                .from(User.class)
+                .where(User_Table.id.eq(id))
+                .querySingle();
+    }
+
+
+    public static User searchFirstOfNet(String id){
+        RemoteService remoteService = Network.remote();
+        try {
+            Response<RspModel<UserCard>> response = remoteService.userFind(id).execute();
+            UserCard card = response.body().getResult();
+
+            if (card != null) {
+
+                card.build().save();
+                // TODO 数据库刷新但是没有更改
+                return card.build();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+
+    }
+
+    // 搜索一个用户
+    public static User search(String id){
+        User user = searchFirstOfLoc(id);
+        if (user == null){
+            return searchFirstOfNet(id);
+        }
+        return user;
     }
 }

@@ -1,6 +1,7 @@
 package com.example.factory.persenter.contact;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.DiffUtil;
 
 import com.example.factory.data.DataSource;
 import com.example.factory.data.helper.UserHelper;
@@ -9,6 +10,7 @@ import com.example.factory.model.db.User;
 import com.example.factory.model.db.User_Table;
 import com.example.factory.persistence.Account;
 import com.example.factory.presenter.BasePresenter;
+import com.example.factory.utils.DiffUiDataCallback;
 import com.raizlabs.android.dbflow.sql.language.SQLite;
 import com.raizlabs.android.dbflow.structure.database.transaction.QueryTransaction;
 
@@ -66,14 +68,29 @@ public class ContactPresenter extends BasePresenter<ContactContract.View> implem
                     userCard.build().save();
                 }
 
-                getmView().getRecyclerAdapter().replace(users);
-                getmView().onAdapterDataChange();
+                diff(getmView().getRecyclerAdapter().getItems(),users);
+
+                //getmView().getRecyclerAdapter().replace(users);
+
+
             }
         });
 
         // TODO
         //  1.关注后没有刷新
-        //  2.全局刷新 
+        //  2.全局刷新
+        //  3.上述本地和网络异步刷新可能会出现冲突的问题
+        //  4.如何识别本地已经存在
 
+    }
+
+    private void diff(List<User> oldList, List<User> newList){
+        DiffUtil.Callback callback = new DiffUiDataCallback<User>(oldList, newList);
+        DiffUtil.DiffResult result = DiffUtil.calculateDiff(callback);
+
+        getmView().getRecyclerAdapter().replace(newList);
+
+        result.dispatchUpdatesTo(getmView().getRecyclerAdapter());
+        getmView().onAdapterDataChange();
     }
 }

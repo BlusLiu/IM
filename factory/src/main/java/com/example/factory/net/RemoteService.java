@@ -49,4 +49,7 @@ public interface RemoteService {
 
     @GET("user/contact")
     Call<RspModel<List<UserCard>>> userContact();
+
+    @GET("user/{userId}")
+    Call<RspModel<UserCard>> userFind(@Path("userId") String userId);
 }

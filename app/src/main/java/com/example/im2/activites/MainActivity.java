@@ -20,6 +20,7 @@ import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.ViewTarget;
 import com.example.common.APP.Activity;
+import com.example.common.widget.PortraitView;
 import com.example.factory.persistence.Account;
 import com.example.im2.R;
 import com.example.im2.activites.AccountActivity;
@@ -58,6 +59,9 @@ public class MainActivity extends Activity
     @BindView(R.id.navigation)
     BottomNavigationView mNavigation;
 
+    @BindView(R.id.im_portrait)
+    PortraitView mPortrait;
+
     private Navhelper<Integer> mNavHelper;
 
     /**
@@ -94,6 +98,7 @@ public class MainActivity extends Activity
         // 初始化
         Menu menu = mNavigation.getMenu();
         menu.performIdentifierAction(R.id.action_home,0);
+        mPortrait.setup(Glide.with(this), Account.getUser());
     }
 
     @Override
@@ -128,6 +133,11 @@ public class MainActivity extends Activity
         int type = Objects.equals(mNavHelper.getCurrentTab().extra, R.string.title_group)? SearchActivity.TYPE_GROUP : SearchActivity.TYPE_USER;
 
         SearchActivity.show(this,type);
+    }
+
+    @OnClick(R.id.im_portrait)
+    void onPortraitClick(){
+        PersonalActivity.show(this, Account.getUserId());
     }
 
     @OnClick(R.id.btn_action)

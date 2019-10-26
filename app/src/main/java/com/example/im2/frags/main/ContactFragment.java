@@ -24,12 +24,15 @@ import com.example.factory.model.card.UserCard;
 import com.example.factory.model.db.User;
 import com.example.factory.persenter.contact.ContactContract;
 import com.example.factory.persenter.contact.ContactPresenter;
+import com.example.factory.persistence.Account;
 import com.example.im2.MessageRecevier;
 import com.example.im2.R;
 import com.example.im2.activites.MessageActivity;
+import com.example.im2.activites.PersonalActivity;
 import com.example.im2.frags.search.SearchUserFragment;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -118,6 +121,11 @@ public class ContactFragment extends PresenterFragment<ContactContract.Presenter
             portrait.setup(Glide.with(getContext()), user);
             name.setText(user.getName());
             desc.setText(user.getDesc());
+        }
+
+        @OnClick(R.id.im_portrait)
+        void onPortraitClick(){
+            PersonalActivity.show(getContext(), mData.getId());
         }
     }
 

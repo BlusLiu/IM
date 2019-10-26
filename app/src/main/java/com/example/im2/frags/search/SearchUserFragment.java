@@ -21,6 +21,7 @@ import com.example.factory.persenter.contact.FollowPresenter;
 import com.example.factory.persenter.search.SearchContract;
 import com.example.factory.persenter.search.SearchUserPresenter;
 import com.example.im2.R;
+import com.example.im2.activites.PersonalActivity;
 import com.example.im2.activites.SearchActivity;
 
 import net.qiujuer.genius.ui.Ui;
@@ -123,6 +124,13 @@ public class SearchUserFragment extends PresenterFragment<SearchContract.Present
             name.setText(userCard.getName());
             add.setEnabled(!userCard.isFollow());
         }
+
+        @OnClick(R.id.portrait)
+        void onPortraitClick(){
+            // 发起关注
+            PersonalActivity.show(getContext(), mData.getId());
+        }
+
         @OnClick(R.id.add)
         void onFollowClick(){
             // 发起关注
