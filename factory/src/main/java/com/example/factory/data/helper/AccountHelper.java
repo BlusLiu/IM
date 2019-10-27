@@ -39,7 +39,9 @@ public class AccountHelper {
                 if (rspModel.success()){
                     AccountRspModel accountRspModel = rspModel.getResult();
                     User user = accountRspModel.getUser();
-                    user.save();
+                    //user.save();
+                    DbHelper.save(User.class, user);
+
                     Account.login(accountRspModel);
                     if (accountRspModel.isBind()){
                         // TODO 缓存绑定
@@ -116,7 +118,8 @@ public class AccountHelper {
             if (rspModel.success()){
                 AccountRspModel accountRspModel = rspModel.getResult();
                 User user = accountRspModel.getUser();
-                user.save();
+                //user.save();
+                DbHelper.save(User.class, user);
                 Account.login(accountRspModel);
                 Log.d("user_data", "onResponse: "+accountRspModel.toString());
                 if (accountRspModel.isBind()){
