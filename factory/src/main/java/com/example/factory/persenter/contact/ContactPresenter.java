@@ -3,13 +3,17 @@ package com.example.factory.persenter.contact;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
 
+import com.example.common.widget.recycler.RecyclerAdapter;
 import com.example.factory.data.DataSource;
 import com.example.factory.data.helper.UserHelper;
+import com.example.factory.data.user.ContactDataSource;
+import com.example.factory.data.user.ContactRepository;
 import com.example.factory.model.card.UserCard;
 import com.example.factory.model.db.User;
 import com.example.factory.model.db.User_Table;
 import com.example.factory.persistence.Account;
 import com.example.factory.presenter.BasePresenter;
+import com.example.factory.presenter.BaseRecyclerPresenter;
 import com.example.factory.utils.DiffUiDataCallback;
 import com.raizlabs.android.dbflow.sql.language.SQLite;
 import com.raizlabs.android.dbflow.structure.database.transaction.QueryTransaction;
@@ -22,16 +26,19 @@ import java.util.List;
  * @Description:
  * @Date: Create in 15:58 2019/10/26
  */
-public class ContactPresenter extends BasePresenter<ContactContract.View> implements ContactContract.Presenter {
+public class ContactPresenter extends BaseRecyclerPresenter<User, ContactContract.View> implements
+        ContactContract.Presenter ,
+        DataSource.SucceedCallback<List<User>>{
     public ContactPresenter(ContactContract.View view) {
         super(view);
+        mSource = new ContactRepository();
     }
-
+    private ContactDataSource mSource;
     @Override
     public void start() {
         super.start();
-
-        SQLite.select()
+        mSource.load(this);
+/*        SQLite.select()
                 .from(User.class)
                 .where(User_Table.isFollow.eq(true))
                 .and(User_Table.id.notEq(Account.getUserId()))
@@ -48,10 +55,18 @@ public class ContactPresenter extends BasePresenter<ContactContract.View> implem
                     }
                 })
                 // 最后一步也要的
-                .execute();
+                .execute();*/
 
         // 加载网络数据
-        UserHelper.refreshContacts(new DataSource.Callback<List<UserCard>>() {
+        UserHelper.refreshContacts();
+
+        // TODO
+        //  1.关注后没有刷新
+        //  2.全局刷新
+        //  3.上述本地和网络异步刷新可能会出现冲突的问题
+        //  4.如何识别本地已经存在
+
+        /*new DataSource.Callback<List<UserCard>>() {
             @Override
             public void onDataNotLoaded(int num) {
 
@@ -74,14 +89,7 @@ public class ContactPresenter extends BasePresenter<ContactContract.View> implem
 
 
             }
-        });
-
-        // TODO
-        //  1.关注后没有刷新
-        //  2.全局刷新
-        //  3.上述本地和网络异步刷新可能会出现冲突的问题
-        //  4.如何识别本地已经存在
-
+        }*/
     }
 
     private void diff(List<User> oldList, List<User> newList){
@@ -92,5 +100,26 @@ public class ContactPresenter extends BasePresenter<ContactContract.View> implem
 
         result.dispatchUpdatesTo(getmView().getRecyclerAdapter());
         getmView().onAdapterDataChange();
+    }
+
+    // 保证这里是子线程
+    @Override
+    public void onDataLoaded(List<User> users) {
+        final ContactContract.View view = getmView();
+        if (view == null)
+            return;
+        RecyclerAdapter<User> adapter = view.getRecyclerAdapter();
+        List<User> old = adapter.getItems();
+
+        DiffUtil.Callback callback = new DiffUiDataCallback<>(old, users);
+        DiffUtil.DiffResult result = DiffUtil.calculateDiff(callback);
+
+        refreshData(result, users);
+    }
+
+    @Override
+    public void destory() {
+        super.destory();
+        mSource.dispose();
     }
 }

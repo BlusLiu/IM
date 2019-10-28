@@ -85,7 +85,7 @@ public class MessageDispatcher implements MessageCenter {
                         group = GroupHelper.findFromLocal(card.getGroupId());
                     }
 
-                    if (receiver == null || group == null)
+                    if ((receiver == null && group == null) || sender == null)
                         continue;
 
                     message = card.build(sender, receiver, group);

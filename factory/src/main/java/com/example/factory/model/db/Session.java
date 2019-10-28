@@ -179,6 +179,11 @@ public class Session extends BaseModel implements DiffUiDataCallback.UiDataDiffe
         return identify;
     }
 
+    // 刷新
+    public void refreshToNow() {
+        // TODO
+    }
+
 
     /**
      * 对于会话信息，最重要的部分进行提取
