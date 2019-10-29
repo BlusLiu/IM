@@ -28,10 +28,11 @@ public class MessageRecevier extends BroadcastReceiver {
             return;
 
         Bundle bundle = intent.getExtras();
+        Log.e(TAG, "onReceive: 收到消息啦！！！！");
         switch (bundle.getInt(PushConsts.CMD_ACTION)){
             case PushConsts.GET_CLIENTID:{
 
-                Log.i(TAG, "GET_CLIENTID: "+bundle.toString());
+                Log.e(TAG, "onReceive: 这是id "+bundle.toString());
                 onClientInit(bundle.getString("clientid"));
                 break;
             }
@@ -41,7 +42,7 @@ public class MessageRecevier extends BroadcastReceiver {
                 byte[] payload = bundle.getByteArray("payload");
                 if (payload != null){
                     String message = new String(payload);
-                    Log.i(TAG, "GET_MSG_DATA: "+message);
+                    Log.e(TAG, "onReceive: 这是消息"+message);
                 }
                 break;
             }

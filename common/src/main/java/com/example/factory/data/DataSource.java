@@ -27,4 +27,6 @@ public interface DataSource {
     interface FailedCallback{
         void onDataNotLoaded(int num);
     }
+
+    void dispose();
 }

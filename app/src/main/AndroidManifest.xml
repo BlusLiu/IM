@@ -39,11 +39,9 @@
             android:exported="true"
             android:permission="1000">
 
-            <!--
-            <intent-filter>
-                <action android:name="com.igexin.sdk.action.${GETUI_APP_ID}"/>
-            </intent-filter>
-            -->
+            <!--<intent-filter>-->
+                <!--<action android:name="com.igexin.sdk.action.${GETUI_APP_ID}"/>-->
+            <!--</intent-filter>-->
         </receiver>
 
         <activity

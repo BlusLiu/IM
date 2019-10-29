@@ -11,6 +11,7 @@ import com.example.factory.data.user.ContactRepository;
 import com.example.factory.model.card.UserCard;
 import com.example.factory.model.db.User;
 import com.example.factory.model.db.User_Table;
+import com.example.factory.persenter.BaseSourcePresenter;
 import com.example.factory.persistence.Account;
 import com.example.factory.presenter.BasePresenter;
 import com.example.factory.presenter.BaseRecyclerPresenter;
@@ -26,18 +27,22 @@ import java.util.List;
  * @Description:
  * @Date: Create in 15:58 2019/10/26
  */
-public class ContactPresenter extends BaseRecyclerPresenter<User, ContactContract.View> implements
+public class ContactPresenter extends BaseSourcePresenter<User, User, ContactDataSource, ContactContract.View>
+        implements
         ContactContract.Presenter ,
         DataSource.SucceedCallback<List<User>>{
     public ContactPresenter(ContactContract.View view) {
-        super(view);
-        mSource = new ContactRepository();
+        super(new ContactRepository(), view);
+
     }
-    private ContactDataSource mSource;
+
     @Override
     public void start() {
         super.start();
+        // 不加载本地的也有对比，但无用户友好性
         mSource.load(this);
+        // 加载网络数据
+        UserHelper.refreshContacts();
 /*        SQLite.select()
                 .from(User.class)
                 .where(User_Table.isFollow.eq(true))
@@ -57,8 +62,7 @@ public class ContactPresenter extends BaseRecyclerPresenter<User, ContactContrac
                 // 最后一步也要的
                 .execute();*/
 
-        // 加载网络数据
-        UserHelper.refreshContacts();
+
 
         // TODO
         //  1.关注后没有刷新
@@ -92,15 +96,6 @@ public class ContactPresenter extends BaseRecyclerPresenter<User, ContactContrac
         }*/
     }
 
-    private void diff(List<User> oldList, List<User> newList){
-        DiffUtil.Callback callback = new DiffUiDataCallback<User>(oldList, newList);
-        DiffUtil.DiffResult result = DiffUtil.calculateDiff(callback);
-
-        getmView().getRecyclerAdapter().replace(newList);
-
-        result.dispatchUpdatesTo(getmView().getRecyclerAdapter());
-        getmView().onAdapterDataChange();
-    }
 
     // 保证这里是子线程
     @Override
@@ -117,9 +112,14 @@ public class ContactPresenter extends BaseRecyclerPresenter<User, ContactContrac
         refreshData(result, users);
     }
 
-    @Override
-    public void destory() {
-        super.destory();
-        mSource.dispose();
-    }
+//    private void diff(List<User> oldList, List<User> newList){
+//        DiffUtil.Callback callback = new DiffUiDataCallback<User>(oldList, newList);
+//        DiffUtil.DiffResult result = DiffUtil.calculateDiff(callback);
+//
+//        getmView().getRecyclerAdapter().replace(newList);
+//
+//        result.dispatchUpdatesTo(getmView().getRecyclerAdapter());
+//        getmView().onAdapterDataChange();
+//    }
+
 }

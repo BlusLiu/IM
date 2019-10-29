@@ -144,7 +144,7 @@ public class DbHelper {
     }
 
 
-    public interface ChangedListener<Data>{
+    public interface ChangedListener<Data extends BaseModel>{
         void onDataSave(Data... list);
 
         void onDataDelete(Data... list);

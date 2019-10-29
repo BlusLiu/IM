@@ -16,7 +16,7 @@ import java.util.Objects;
  * @Date: Create in 13:47 2019/10/19
  */
 @Table(database = AppDatabase.class)
-public class User extends BaseModel implements Author, DiffUiDataCallback.UiDataDiffer {
+public class User extends BaseDbModel<User> implements Author{
 
 
     @PrimaryKey
@@ -152,17 +152,36 @@ public class User extends BaseModel implements Author, DiffUiDataCallback.UiData
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, phone, portrait, alias, desc, sex, isFollow, follows, following, modifyAt);
+        return Objects.hash(id);
     }
 
     @Override
-    public boolean isSame(Object o) {
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return this == o || Objects.equals(id, user.id);
+        return sex == user.sex &&
+                follows == user.follows &&
+                following == user.following &&
+                Objects.equals(id, user.id) &&
+                Objects.equals(name, user.name) &&
+                Objects.equals(phone, user.phone) &&
+                Objects.equals(portrait, user.portrait) &&
+                Objects.equals(alias, user.alias) &&
+                Objects.equals(desc, user.desc) &&
+                Objects.equals(isFollow, user.isFollow) &&
+                Objects.equals(modifyAt, user.modifyAt);
     }
 
     @Override
-    public boolean isUiContentSame(Object old) {
-        return this == old || this.hashCode() == ((User)old).hashCode();
+    public boolean isSame(User old) {
+        User user = old;
+        return this == old || Objects.equals(id, user.id);
     }
+
+    @Override
+    public boolean isUiContentSame(User old) {
+        return this == old || this.hashCode() == old.hashCode();
+    }
+
 }

@@ -2,6 +2,7 @@ package com.example.im2.activites;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.media.Image;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -22,6 +23,7 @@ import com.bumptech.glide.request.target.ViewTarget;
 import com.example.common.APP.Activity;
 import com.example.common.widget.PortraitView;
 import com.example.factory.persistence.Account;
+import com.example.im2.MessageRecevier;
 import com.example.im2.R;
 import com.example.im2.activites.AccountActivity;
 import com.example.im2.frags.assist.PermissionsFragment;
@@ -44,6 +46,8 @@ public class MainActivity extends Activity
         implements BottomNavigationView.OnNavigationItemSelectedListener,
         Navhelper.OnTabChangedListener<Integer> {
 
+    private MessageRecevier messageRecevier;
+    private IntentFilter filter;
     @BindView(R.id.txt_title)
     TextView mTitle;
 
@@ -75,6 +79,12 @@ public class MainActivity extends Activity
     // 返回false activity直接finish
     @Override
     protected boolean initArgs(Bundle bundle) {
+
+        filter = new IntentFilter();
+        filter.addAction("com.igexin.sdk.action.4qJyoiM47wAcgoGeMwO4G8");
+        messageRecevier = new MessageRecevier();
+        registerReceiver(messageRecevier, filter);
+
         if (Account.isComplete()){
             return super.initArgs(bundle);
         }else {
@@ -215,5 +225,12 @@ public class MainActivity extends Activity
                 .start();
 
 
+    }
+
+    // 这取消注册
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(messageRecevier);
     }
 }
