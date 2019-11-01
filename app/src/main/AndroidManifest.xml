@@ -22,11 +22,11 @@
         <activity
             android:name=".activites.PersonalActivity"
             android:label="@string/title_activity_personal"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.TransStatusBar"></activity>
         <activity
             android:name=".activites.MessageActivity"
             android:label="@string/title_activity_message"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.TransStatusBar" />
         <activity
             android:name=".activites.SearchActivity"
             android:label="@string/title_search"

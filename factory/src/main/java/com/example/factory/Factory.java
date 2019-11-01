@@ -47,7 +47,8 @@ public class Factory {
     static {
         instance = new Factory();
     }
-    private Factory(){
+
+    private Factory() {
         executor = Executors.newFixedThreadPool(4);
         gson = new GsonBuilder()
                 .setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS")
@@ -56,11 +57,11 @@ public class Factory {
                 .create();
     }
 
-    public static Applocation app(){
+    public static Applocation app() {
         return Applocation.getInstance();
     }
 
-    public static void runOnAsync(Runnable runnable){
+    public static void runOnAsync(Runnable runnable) {
         instance.executor.execute(runnable);
     }
 
@@ -97,34 +98,35 @@ public class Factory {
         if (model == null)
             return;
 
-        Log.e("message", model.toString());
-        for (PushModel.Entity entity : model.getEntities()){
-            switch (entity.type){
+
+        for (PushModel.Entity entity : model.getEntities()) {
+            Log.e("dispatchPush_entity:", entity.toString());
+            switch (entity.type) {
                 case PushModel.ENTITY_TYPE_LOGOUT:
                     instance.logout();
                     return;
-                case PushModel.ENTITY_TYPE_MESSAGE:{
+                case PushModel.ENTITY_TYPE_MESSAGE: {
                     MessageCard card = getGson().fromJson(entity.content, MessageCard.class);
                     getMessageCenter().dispatch(card);
                     break;
 
                 }
 
-                case PushModel.ENTITY_TYPE_ADD_FRIEND:{
+                case PushModel.ENTITY_TYPE_ADD_FRIEND: {
                     UserCard card = getGson().fromJson(entity.content, UserCard.class);
                     getUserCenter().dispatch(card);
                     break;
                 }
 
-                case PushModel.ENTITY_TYPE_ADD_GROUP:{
+                case PushModel.ENTITY_TYPE_ADD_GROUP: {
                     GroupCard card = getGson().fromJson(entity.content, GroupCard.class);
                     getGroupCenter().dispatch(card);
                     break;
                 }
 
                 case PushModel.ENTITY_TYPE_ADD_GROUP_MEMBERS:
-                case PushModel.ENTITY_TYPE_MODIFY_GROUP_MEMBERS:{
-                    Type type = new TypeToken<List<GroupMemberCard>>(){
+                case PushModel.ENTITY_TYPE_MODIFY_GROUP_MEMBERS: {
+                    Type type = new TypeToken<List<GroupMemberCard>>() {
 
                     }.getType();
 
@@ -132,7 +134,7 @@ public class Factory {
                     getGroupCenter().dispatch(card.toArray(new GroupMemberCard[0]));
                     break;
                 }
-                case PushModel.ENTITY_TYPE_EXIT_GROUP_MEMBERS:{
+                case PushModel.ENTITY_TYPE_EXIT_GROUP_MEMBERS: {
 
                     break;
                 }
@@ -141,16 +143,17 @@ public class Factory {
         }
     }
 
-    public static void setup(){
+    public static void setup() {
         FlowManager.init(new FlowConfig.Builder(app())
-        .openDatabasesOnInit(true)
-        .build());
+                .openDatabasesOnInit(true)
+                .build());
 
         Account.load(app());
     }
 
     /**
      * 错误数据的解析
+     *
      * @param model
      * @param callback
      */
@@ -212,15 +215,17 @@ public class Factory {
         }
     }
 
-    public static UserCenter getUserCenter(){
+    public static UserCenter getUserCenter() {
         return UserDispatcher.instance();
     }
 
-    public static MessageCenter getMessageCenter(){
+    public static MessageCenter getMessageCenter() {
         return MessageDispatcher.instance();
     }
 
-    public static GroupCenter getGroupCenter(){
+    public static GroupCenter getGroupCenter() {
         return GroupDispatcher.instance();
     }
 }
+
+
