@@ -43,6 +43,7 @@ public class MessageRecevier extends BroadcastReceiver {
                 if (payload != null){
                     String message = new String(payload);
                     Log.e(TAG, "onReceive: 这是消息"+message);
+                    onMessageArrived(message);
                 }
                 break;
             }
