@@ -59,7 +59,7 @@ public class Network {
                 .build();
         Retrofit.Builder builder = new Retrofit.Builder();
 
-        instance.retrofit = builder.baseUrl(Common.Constance.API_URL_308)
+        instance.retrofit = builder.baseUrl(Common.Constance.API_URL_ME)
                 .client(client)
                 .addConverterFactory(GsonConverterFactory.create(Factory.getGson()))
                 .build();

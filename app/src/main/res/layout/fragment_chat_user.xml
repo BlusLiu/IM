@@ -107,6 +107,7 @@
             android:lineSpacingMultiplier="1"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textColorHint="@color/textSecond"
+            android:textColor="@color/textPrimary"
             android:textCursorDrawable="@drawable/ic_cursor"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

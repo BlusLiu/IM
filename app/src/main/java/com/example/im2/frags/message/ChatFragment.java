@@ -17,10 +17,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.common.APP.Fragment;
+import com.example.common.APP.PresenterFragment;
 import com.example.common.widget.PortraitView;
 import com.example.common.widget.recycler.RecyclerAdapter;
 import com.example.factory.model.db.Message;
 import com.example.factory.model.db.User;
+import com.example.factory.persenter.message.ChatContract;
 import com.example.factory.persistence.Account;
 import com.example.im2.R;
 import com.example.im2.activites.MessageActivity;
@@ -39,7 +41,10 @@ import butterknife.OnClick;
  * @Description:
  * @Date: Create in 15:10 2019/11/1
  */
-public abstract class ChatFragment extends Fragment implements AppBarLayout.OnOffsetChangedListener {
+public abstract class ChatFragment<InitModel>
+        extends PresenterFragment<ChatContract.Presenter>
+        implements AppBarLayout.OnOffsetChangedListener,
+        ChatContract.View<InitModel> {
     protected String mReceiverId;
     protected Adapter mAdapter;
 
@@ -96,6 +101,13 @@ public abstract class ChatFragment extends Fragment implements AppBarLayout.OnOf
         mAppBarLayout.addOnOffsetChangedListener(this);
     }
 
+    @Override
+    protected void initData() {
+        super.initData();
+
+        mPresenter.start();
+    }
+
     private void initEditContent(){
         mContent.addTextChangedListener(new TextWatcher() {
             @Override
@@ -135,7 +147,21 @@ public abstract class ChatFragment extends Fragment implements AppBarLayout.OnOf
 
     @OnClick(R.id.btn_submit)
     void onSubmitClick(){
+        if (mSubmit.isActivated()){
+            String content = mContent.getText().toString();
+            mContent.setText("");
+            mPresenter.pushText(content);
+        }
+    }
 
+    @Override
+    public RecyclerAdapter<Message> getRecyclerAdapter() {
+        return mAdapter;
+    }
+
+    @Override
+    public void onAdapterDataChange() {
+        // 界面没有占位布局
     }
 
     private class Adapter extends RecyclerAdapter<Message>{

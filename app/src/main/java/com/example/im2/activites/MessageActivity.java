@@ -2,6 +2,7 @@ package com.example.im2.activites;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.text.TextUtils;
 
@@ -9,11 +10,15 @@ import com.example.common.APP.Activity;
 import com.example.common.APP.Fragment;
 import com.example.factory.model.Author;
 import com.example.factory.model.db.Group;
+import com.example.im2.MessageRecevier;
 import com.example.im2.R;
 import com.example.im2.frags.message.ChatGroupFragment;
 import com.example.im2.frags.message.ChatUserFragment;
 
 public class MessageActivity extends Activity {
+    private MessageRecevier messageRecevier;
+    private IntentFilter filter;
+
     public static final String KEY_RECEIVER_ID = "KEY_RECEIVER_ID";
     public static final String KEY_RECEIVER_IS_GROUP = "KEY_RECEIVER_IS_GROUP";
     private String mReceiverId;
@@ -49,6 +54,11 @@ public class MessageActivity extends Activity {
 
     @Override
     protected boolean initArgs(Bundle bundle) {
+        filter = new IntentFilter();
+        filter.addAction("com.igexin.sdk.action.4qJyoiM47wAcgoGeMwO4G8");
+        messageRecevier = new MessageRecevier();
+        registerReceiver(messageRecevier, filter);
+
         mReceiverId = bundle.getString(KEY_RECEIVER_ID);
         mIsGroup = bundle.getBoolean(KEY_RECEIVER_IS_GROUP);
         return !TextUtils.isEmpty(mReceiverId);
@@ -72,5 +82,11 @@ public class MessageActivity extends Activity {
                 .add(R.id.lay_container, fragment)
                 .commit();
 
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(messageRecevier);
     }
 }

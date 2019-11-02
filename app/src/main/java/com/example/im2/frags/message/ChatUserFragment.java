@@ -10,6 +10,9 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.example.common.APP.Fragment;
 import com.example.common.widget.PortraitView;
+import com.example.factory.model.db.User;
+import com.example.factory.persenter.message.ChatContract;
+import com.example.factory.persenter.message.ChatUserPresenter;
 import com.example.im2.R;
 import com.example.im2.activites.PersonalActivity;
 import com.google.android.material.appbar.AppBarLayout;
@@ -18,7 +21,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 
-public class ChatUserFragment extends ChatFragment {
+public class ChatUserFragment extends ChatFragment<User> implements ChatContract.UserView {
     @BindView(R.id.portrait)
     PortraitView mPortraitView;
 
@@ -90,5 +93,16 @@ public class ChatUserFragment extends ChatFragment {
     @OnClick(R.id.portrait)
     void onPortraitClick(){
         PersonalActivity.show(getContext(), mReceiverId);
+    }
+
+    @Override
+    protected ChatContract.Presenter initPresenter() {
+        return new ChatUserPresenter(this, mReceiverId);
+    }
+
+    // 对方信息的初始化
+    @Override
+    public void onInit(User user) {
+
     }
 }
