@@ -8,11 +8,13 @@ import android.view.View;
 
 import androidx.appcompat.widget.Toolbar;
 
+import com.bumptech.glide.Glide;
 import com.example.common.APP.Fragment;
 import com.example.common.widget.PortraitView;
 import com.example.factory.model.db.User;
 import com.example.factory.persenter.message.ChatContract;
 import com.example.factory.persenter.message.ChatUserPresenter;
+import com.example.factory.persistence.Account;
 import com.example.im2.R;
 import com.example.im2.activites.PersonalActivity;
 import com.google.android.material.appbar.AppBarLayout;
@@ -30,6 +32,12 @@ public class ChatUserFragment extends ChatFragment<User> implements ChatContract
     @Override
     protected int getContentLayoutId() {
         return R.layout.fragment_chat_user;
+    }
+
+    @Override
+    protected void initWidget(View root) {
+        super.initWidget(root);
+        mPortraitView.setup(Glide.with(getContext()), portrait);
     }
 
     @Override

@@ -27,6 +27,7 @@ import com.example.factory.persistence.Account;
 import com.example.im2.R;
 import com.example.im2.activites.MessageActivity;
 import com.google.android.material.appbar.AppBarLayout;
+import com.google.android.material.appbar.CollapsingToolbarLayout;
 
 import net.qiujuer.genius.ui.compat.UiCompat;
 import net.qiujuer.genius.ui.widget.Loading;
@@ -46,9 +47,13 @@ public abstract class ChatFragment<InitModel>
         implements AppBarLayout.OnOffsetChangedListener,
         ChatContract.View<InitModel> {
     protected String mReceiverId;
+    protected String name;
+    protected String portrait;
     protected Adapter mAdapter;
 
 
+    @BindView(R.id.collapsingToolbarLayout)
+    CollapsingToolbarLayout collapsingToolbarLayout;
 
     @BindView(R.id.toolbar_test)
     Toolbar mToolbar;
@@ -71,7 +76,10 @@ public abstract class ChatFragment<InitModel>
     @Override
     protected void initArgs(Bundle bundle) {
         super.initArgs(bundle);
+        // bundle只有一个值
         mReceiverId = bundle.getString(MessageActivity.KEY_RECEIVER_ID);
+        portrait = bundle.getString(MessageActivity.KEY_RECEIVER_PORTRAIT);
+        name = bundle.getString(MessageActivity.KEY_RECEIVER_NAME);
 
     }
 
@@ -84,6 +92,8 @@ public abstract class ChatFragment<InitModel>
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         mAdapter = new Adapter();
         mRecyclerView.setAdapter(mAdapter);
+        collapsingToolbarLayout.setTitle(name);
+
     }
 
     protected void initToolbar(){
