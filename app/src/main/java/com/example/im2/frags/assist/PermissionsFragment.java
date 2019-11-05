@@ -15,6 +15,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.example.im2.R;
+import com.example.im2.activites.MainActivity;
 import com.example.im2.frags.media.GalleryFragment;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
@@ -164,6 +165,7 @@ public class PermissionsFragment extends BottomSheetDialogFragment implements Ea
             // Applocation.showToast(R.string.label_permission_ok);
             // 得到跟布局，需要oncreate后
             refreshState(getView());
+            MainActivity.show(getActivity());
         }else {
             EasyPermissions.requestPermissions(this, getString(R.string.title_assist_permissions),RC,perms);
         }
