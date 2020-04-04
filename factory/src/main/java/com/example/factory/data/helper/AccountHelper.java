@@ -46,13 +46,15 @@ public class AccountHelper {
                     if (accountRspModel.isBind()){
                         // TODO 缓存绑定
                         Account.setBind(true);
-
-
+                        // 因为把这里改了导致绑定不了就被销毁？
+                        // 第一次返回参数错误的原因？？因为请求两次？
+                        if (callback != null)
+                        callback.onDataLoaded(user);
                     }else {
                         bindPush(callback);
 
                     }
-                    callback.onDataLoaded(user);
+
                 }else {
                     // TODO 服务器错误callback.onDataNotLoaded(R.String.data_rsp_error_service);
                     Factory.decodeRspCode(rspModel, callback);

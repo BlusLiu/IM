@@ -62,10 +62,10 @@ public class LaunchActivity extends Activity {
         super.initData();
 
         // xian's显式注册一下?
-        filter = new IntentFilter();
-        filter.addAction("com.igexin.sdk.action.4qJyoiM47wAcgoGeMwO4G8");
-        messageRecevier = new MessageRecevier();
-        registerReceiver(messageRecevier, filter);
+//        filter = new IntentFilter();
+//        filter.addAction("com.igexin.sdk.action.4qJyoiM47wAcgoGeMwO4G8");
+//        messageRecevier = new MessageRecevier();
+//        registerReceiver(messageRecevier, filter);
         // 动画进入到50%，等待PushId获取到
         startAnim(0.5f, new Runnable() {
             @Override
@@ -164,9 +164,9 @@ public class LaunchActivity extends Activity {
     };
 
     // 这取消注册
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        unregisterReceiver(messageRecevier);
-    }
+//    @Override
+//    protected void onDestroy() {
+//        super.onDestroy();
+//        unregisterReceiver(messageRecevier);
+//    }
 }
