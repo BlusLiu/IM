@@ -12,6 +12,7 @@ import com.example.common.widget.PortraitView;
 import com.example.factory.model.db.User;
 import com.example.factory.persenter.contact.PersonalContract;
 import com.example.factory.persenter.contact.PersonalPresenter;
+import com.example.factory.persistence.Account;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -55,6 +56,8 @@ public class PersonalActivity extends PresenterToolbarActivity<PersonalContract.
     TextView mFollowing;
     @BindView(R.id.btn_say_hello)
     Button mSayHello;
+    @BindView(R.id.btn_exit)
+    Button mExit;
 
     private MenuItem mFollow;
     private boolean mIsFollowUser = false;
@@ -108,11 +111,18 @@ public class PersonalActivity extends PresenterToolbarActivity<PersonalContract.
 
     @OnClick(R.id.btn_say_hello)
     void onSayHelloClick() {
-        // TODO
+
         User user = mPresenter.getUserPersonal();
         if (user == null)
             return;
         MessageActivity.show(this, user);
+    }
+
+    @OnClick(R.id.btn_exit)
+    void onExitClick() {
+
+        Account.clear(this);
+        AccountActivity.show(this);
     }
 
     private void changeFollowItemStatus(){
@@ -150,6 +160,11 @@ public class PersonalActivity extends PresenterToolbarActivity<PersonalContract.
     @Override
     public void allowSayHellow(boolean isAllow) {
         mSayHello.setVisibility(isAllow? View.VISIBLE : View.INVISIBLE);
+    }
+
+    @Override
+    public void allowExit(boolean isAllow) {
+        mExit.setVisibility(isAllow? View.VISIBLE : View.INVISIBLE);
     }
 
     @Override
