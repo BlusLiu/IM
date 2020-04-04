@@ -49,7 +49,6 @@ public class PersonalPresenter extends BasePresenter<PersonalContract.View> impl
         final boolean isSelf = user.getId().equalsIgnoreCase(Account.getUserId());
         final boolean isFollow = isSelf || user.isFollow();
         final boolean allowSayHello = isFollow && !isSelf;
-        final boolean allowExit = isSelf;
 
         Run.onUiAsync(new Action() {
             @Override
@@ -57,8 +56,6 @@ public class PersonalPresenter extends BasePresenter<PersonalContract.View> impl
                 view.onLoadDone(user);
                 view.setFollowStatus(isFollow);
                 view.allowSayHellow(allowSayHello);
-                view.allowExit(isSelf);
-
             }
         });
     }

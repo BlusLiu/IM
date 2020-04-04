@@ -9,7 +9,6 @@ import com.example.factory.model.db.Message;
 import com.example.factory.model.db.Message_Table;
 import com.example.factory.net.Network;
 import com.example.factory.net.RemoteService;
-import com.raizlabs.android.dbflow.sql.language.OperatorGroup;
 import com.raizlabs.android.dbflow.sql.language.SQLite;
 
 import retrofit2.Call;
@@ -68,16 +67,5 @@ public class MessageHelper {
                 });
             }
         });
-    }
-
-    public static Message  findLastWithUser(String userId) {
-        return SQLite.select()
-                .from(Message.class)
-                .where(OperatorGroup.clause()
-                        .or(Message_Table.sender_id.eq(userId))
-                        .or(Message_Table.receiver_id.eq(userId))
-                        .and(Message_Table.group_id.isNull()))
-                .orderBy(Message_Table.createAt, false)
-                .querySingle();
     }
 }

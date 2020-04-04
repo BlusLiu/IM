@@ -1,9 +1,5 @@
 package com.example.factory.model.db;
 
-import android.text.TextUtils;
-
-import com.example.factory.data.helper.MessageHelper;
-import com.example.factory.data.helper.UserHelper;
 import com.example.factory.utils.DiffUiDataCallback;
 import com.raizlabs.android.dbflow.annotation.Column;
 import com.raizlabs.android.dbflow.annotation.ForeignKey;
@@ -185,42 +181,7 @@ public class Session extends BaseDbModel<Session> {
 
     // 刷新
     public void refreshToNow() {
-
-        Message message;
-        if(receiverType == Message.RECEIVER_TYPE_GROUP){
-            // TODO
-        }else{
-            message = MessageHelper.findLastWithUser(id);
-            if(message == null){
-                if(TextUtils.isEmpty(picture)
-                        || TextUtils.isEmpty(this.title)){
-                    User user = UserHelper.search(id);
-                    if(user != null){
-                        this.picture = user.getPortrait();
-                        this.title = user.getName();
-                    }
-                }
-                this.message = null;
-                this.content = "";
-                this.modifyAt = new Date(System.currentTimeMillis());
-            }else{
-                if(TextUtils.isEmpty(picture)
-                        || TextUtils.isEmpty(this.title)){
-                    User user = message.getOther();
-                    user.load();
-                    if(user != null){
-                        this.picture = user.getPortrait();
-                        this.title = user.getName();
-                    }
-                }
-                this.message = message;
-                this.content = message.getSampleContent();
-                this.modifyAt = message.getCreateAt();
-            }
-
-        }
-
-
+        // TODO
     }
 
 
