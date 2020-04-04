@@ -12,6 +12,7 @@ public class App extends Applocation {
     public void onCreate() {
         super.onCreate();
         Factory.setup();
-        PushManager.getInstance().initialize(this);
+        PushManager.getInstance().initialize(this, MessagePushService.class);
+        PushManager.getInstance().registerPushIntentService(this, MessageReceiverService.class);
     }
 }

@@ -65,6 +65,7 @@ public class UserActivity extends Activity {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
+
         //super.onActivityResult(requestCode, resultCode, data);
         mFragment.onActivityResult(requestCode, resultCode, data);
     }

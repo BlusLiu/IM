@@ -43,6 +43,6 @@ ext{
     gsonVersion = '2.8.0'
     retrofitVersion = '2.1.0'
 
-    getuiVersion = '2.9.3.0'
+    getuiVersion = '2.13.0.0'
     dbflowVersion = "4.0.0-beta7"
 }

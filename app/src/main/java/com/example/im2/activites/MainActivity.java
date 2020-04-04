@@ -85,10 +85,10 @@ public class MainActivity extends Activity
     @Override
     protected boolean initArgs(Bundle bundle) {
 
-        filter = new IntentFilter();
-        filter.addAction("com.igexin.sdk.action.4qJyoiM47wAcgoGeMwO4G8");
-        messageRecevier = new MessageRecevier();
-        registerReceiver(messageRecevier, filter);
+//        filter = new IntentFilter();
+//        filter.addAction("com.igexin.sdk.action.4qJyoiM47wAcgoGeMwO4G8");
+//        messageRecevier = new MessageRecevier();
+//        registerReceiver(messageRecevier, filter);
 
         if (Account.isComplete()){
             return super.initArgs(bundle);
@@ -232,10 +232,10 @@ public class MainActivity extends Activity
 
     }
 
-    // 这取消注册
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        unregisterReceiver(messageRecevier);
-    }
+//    // 这取消注册
+//    @Override
+//    protected void onDestroy() {
+//        super.onDestroy();
+//        unregisterReceiver(messageRecevier);
+//    }
 }

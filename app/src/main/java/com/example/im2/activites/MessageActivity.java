@@ -68,10 +68,10 @@ public class MessageActivity extends Activity {
 
     @Override
     protected boolean initArgs(Bundle bundle) {
-        filter = new IntentFilter();
-        filter.addAction("com.igexin.sdk.action.4qJyoiM47wAcgoGeMwO4G8");
-        messageRecevier = new MessageRecevier();
-        registerReceiver(messageRecevier, filter);
+//        filter = new IntentFilter();
+//        filter.addAction("com.igexin.sdk.action.4qJyoiM47wAcgoGeMwO4G8");
+//        messageRecevier = new MessageRecevier();
+//        registerReceiver(messageRecevier, filter);
         rName = bundle.getString(KEY_RECEIVER_NAME);
         rPortrait = bundle.getString(KEY_RECEIVER_PORTRAIT);
         mReceiverId = bundle.getString(KEY_RECEIVER_ID);
@@ -101,9 +101,9 @@ public class MessageActivity extends Activity {
 
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        unregisterReceiver(messageRecevier);
-    }
+//    @Override
+//    protected void onDestroy() {
+//        super.onDestroy();
+//        unregisterReceiver(messageRecevier);
+//    }
 }

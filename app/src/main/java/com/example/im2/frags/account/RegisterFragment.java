@@ -13,6 +13,7 @@ import android.widget.EditText;
 
 import androidx.appcompat.widget.Toolbar;
 
+import com.example.common.APP.Applocation;
 import com.example.common.APP.Fragment;
 import com.example.common.APP.PresenterFragment;
 import com.example.factory.persenter.account.RegisterContract;
@@ -86,6 +87,12 @@ public class RegisterFragment extends PresenterFragment<RegisterContract.Present
 
     @Override
     public void registerSuccess() {
+        Applocation.showToast("注册成功");
+        //super.showError("注册成功");
+        mSubmit.setEnabled(false);
+        mPhone.setEnabled(false);
+        mName.setEnabled(false);
+        mPassword.setEnabled(false);
         // 注册成功，这个时候账户已经登陆
         MainActivity.show(getContext());
         getActivity().finish();

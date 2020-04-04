@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.im2">
 
     <uses-permission android:name="android.permission.GET_TASKS" />
@@ -10,17 +11,22 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.SYSTEM_OVERLAY_WINDOW"/>
 
 
     <application
         android:usesCleartextTraffic="true"
         android:name=".App"
-        android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:allowBackup="false"
+        android:icon="@drawable/ic_icon3"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        tools:ignore="GoogleAppIndexingWarning"
+        tools:replace="android:allowBackup"
+        tools:targetApi="m"
+        >
         <activity
             android:name=".activites.PersonalActivity"
             android:label="@string/title_activity_personal"
@@ -35,16 +41,30 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.TransStatusBar" />
 
-        <receiver
-            android:name=".MessageRecevier"
+        <!--<receiver-->
+            <!--android:name=".MessageRecevier"-->
+            <!--android:enabled="true"-->
+            <!--android:exported="true"-->
+            <!--android:permission="1000">-->
+
+            <!--&lt;!&ndash;<intent-filter>&ndash;&gt;-->
+                <!--&lt;!&ndash;<action android:name="com.igexin.sdk.action.${GETUI_APP_ID}"/>&ndash;&gt;-->
+            <!--&lt;!&ndash;</intent-filter>&ndash;&gt;-->
+        <!--</receiver>-->
+        <service
+            android:name=".MessagePushService"
             android:enabled="true"
             android:exported="true"
-            android:permission="1000">
-
-            <!--<intent-filter>-->
-                <!--<action android:name="com.igexin.sdk.action.${GETUI_APP_ID}"/>-->
-            <!--</intent-filter>-->
-        </receiver>
+            android:label="AppPushService"
+            android:permission="1000"
+            android:process=":pushservice" />
+        <!-- 个推的消息送达服务，用以接收AppPushService处理后的有效消息接收，类似于之前的广播 -->
+        <service
+            android:name=".MessageReceiverService"
+            android:enabled="true"
+            android:exported="true"
+            android:label="AppMessageReceiverService"
+            android:permission="1000" />
 
         <activity
             android:name=".activites.UserActivity"
@@ -53,7 +73,7 @@
             android:theme="@style/AppTheme.TransStatusBar" />
         <activity
             android:name=".LaunchActivity"
-            android:label="@string/title_activity_launch"
+            android:icon="@drawable/ic_icon3"
             android:theme="@style/AppTheme.TransStatusBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

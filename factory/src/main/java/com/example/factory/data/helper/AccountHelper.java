@@ -46,13 +46,13 @@ public class AccountHelper {
                     if (accountRspModel.isBind()){
                         // TODO 缓存绑定
                         Account.setBind(true);
-                        if (callback != null)
-                        callback.onDataLoaded(user);
+
+
                     }else {
                         bindPush(callback);
 
                     }
-
+                    callback.onDataLoaded(user);
                 }else {
                     // TODO 服务器错误callback.onDataNotLoaded(R.String.data_rsp_error_service);
                     Factory.decodeRspCode(rspModel, callback);
