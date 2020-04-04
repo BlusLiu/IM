@@ -14,7 +14,7 @@ public class Common {
         // 常用的本地服务器地址
         String API_URL_308 = "http://192.168.1.108:8889/api/";
         String API_URL_HDU = "http://10.66.117.1:8889/api/";
-        String API_URL_ME = "http://192.168.43.224:8889/api/";
+        String API_URL_ME = "http://192.168.1.4:8889/api/";
 
 
     }

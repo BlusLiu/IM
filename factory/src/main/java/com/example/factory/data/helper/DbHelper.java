@@ -28,7 +28,7 @@ import java.util.Set;
  * @Description:
  * @Date: Create in 10:00 2019/10/27
  */
-public class DbHelper {
+public class   DbHelper {
     private static final DbHelper instance;
 
     static {

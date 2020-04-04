@@ -108,4 +108,21 @@ public class MsgCreateModel {
         }
         return this.card;
     }
+
+    public static MsgCreateModel buildWithMessage(Message message){
+        MsgCreateModel model = new MsgCreateModel();
+        model.id = message.getId();
+        model.content = message.getContent();
+        model.type = message.getType();
+        model.attach = message.getAttach();
+
+        if(message.getReceiver() != null){
+            model.receiverId = message.getReceiver().getId();
+            model.receiverType = Message.RECEIVER_TYPE_NONE;
+        }else{
+            model.receiverId = message.getGroup().getId();
+            model.receiverType = Message.RECEIVER_TYPE_GROUP;
+        }
+        return model;
+    }
 }

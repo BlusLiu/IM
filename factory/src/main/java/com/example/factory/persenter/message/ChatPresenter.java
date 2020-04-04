@@ -7,6 +7,7 @@ import com.example.factory.data.message.MessageDataSource;
 import com.example.factory.model.api.message.MsgCreateModel;
 import com.example.factory.model.db.Message;
 import com.example.factory.persenter.BaseSourcePresenter;
+import com.example.factory.persistence.Account;
 import com.example.factory.utils.DiffUiDataCallback;
 
 import java.util.List;
@@ -66,6 +67,15 @@ public class ChatPresenter<View extends ChatContract.View>
 
     @Override
     public boolean rePush(Message message) {
+        if(Account.isLogin() && Account.getUserId().equalsIgnoreCase(message.getSender().getId())
+                && message.getStatus() == Message.STATUS_FAILED){
+            message.setStatus(Message.STATUS_CREATED);
+
+            MsgCreateModel model = MsgCreateModel.buildWithMessage(message);
+            MessageHelper.push(model);
+            return  true;
+
+        }
         return false;
     }
 }

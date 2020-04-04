@@ -111,6 +111,7 @@ public class ChatUserFragment extends ChatFragment<User> implements ChatContract
     // 对方信息的初始化
     @Override
     public void onInit(User user) {
+        mPortraitView.setup(Glide.with(getContext()), user.getPortrait());
 
     }
 }

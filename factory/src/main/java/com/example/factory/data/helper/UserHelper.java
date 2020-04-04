@@ -125,6 +125,10 @@ public class UserHelper {
             @Override
             public void onResponse(Call<RspModel<List<UserCard>>> call, Response<RspModel<List<UserCard>>> response) {
                 RspModel<List<UserCard>> rspModel = response.body();
+
+                if(rspModel == null){
+                    return;
+                }
                 if (rspModel.success()){
                     List<UserCard> cards = rspModel.getResult();
                     if (cards == null || cards.size() == 0)

@@ -74,6 +74,10 @@ public class MessageDispatcher implements MessageCenter {
                         message.setCreateAt(card.getCreateAt());
 
                     // TODO 更新一些变化的内容
+                    message.setContent(card.getContent());
+                    message.setAttach(card.getAttach());
+                    // 更新状态
+                    message.setStatus(card.getStatus());
                 }else {
                     User sender = UserHelper.search(card.getSenderId());
                     User receiver = null;

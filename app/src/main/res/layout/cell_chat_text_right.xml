@@ -30,7 +30,7 @@
             android:minHeight="@dimen/len_24"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textColor="@color/textPrimary"
-            tools:text="@string/app_name" />
+            tools:text="hhhhhhhhhhhhh" />
 
     </FrameLayout>
 

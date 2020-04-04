@@ -5,6 +5,9 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.media.Image;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.HandlerThread;
+import android.os.Message;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -45,6 +48,8 @@ import butterknife.OnClick;
 public class MainActivity extends Activity
         implements BottomNavigationView.OnNavigationItemSelectedListener,
         Navhelper.OnTabChangedListener<Integer> {
+
+
 
     private MessageRecevier messageRecevier;
     private IntentFilter filter;

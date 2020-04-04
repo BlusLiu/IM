@@ -35,7 +35,8 @@ public class PersonalPresenter extends BasePresenter<PersonalContract.View> impl
                 if (view != null){
                     String id = view.getUserId();
                     User user = UserHelper.searchFirstOfNet(id);
-                    view.onLoadDone(user);
+
+                    //这里搞错了，应该是在下面的函数里改变view view.onLoadDone(user);
                     onLoaded(view, user);
                 }
             }

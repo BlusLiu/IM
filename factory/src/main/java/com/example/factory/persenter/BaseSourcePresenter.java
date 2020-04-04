@@ -13,7 +13,11 @@ import java.util.List;
  * @Description:
  * @Date: Create in 13:11 2019/10/29
  */
-public abstract class BaseSourcePresenter<Data, ViewModel,
+
+// 这里需要理解这里的presenter
+public abstract class BaseSourcePresenter<
+        Data,
+        ViewModel,
         Source extends DbDataSource<Data>,
         View extends BaseContract.RecyclerView>
         extends BaseRecyclerPresenter<ViewModel, View>

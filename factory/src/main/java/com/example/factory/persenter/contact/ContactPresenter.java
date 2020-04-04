@@ -27,7 +27,8 @@ import java.util.List;
  * @Description:
  * @Date: Create in 15:58 2019/10/26
  */
-public class ContactPresenter extends BaseSourcePresenter<User, User, ContactDataSource, ContactContract.View>
+public class ContactPresenter
+        extends BaseSourcePresenter<User, User, ContactDataSource, ContactContract.View>
         implements
         ContactContract.Presenter ,
         DataSource.SucceedCallback<List<User>>{

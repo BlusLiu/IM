@@ -259,8 +259,8 @@ public abstract class ChatFragment<InitModel>
 
         @OnClick(R.id.portrait)
         void onRePushClick(){
-            if (mLoading != null){
-
+            if (mLoading != null && mPresenter.rePush(mData)){
+                updateData(mData);
             }
         }
     }
