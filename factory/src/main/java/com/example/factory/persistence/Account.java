@@ -52,6 +52,11 @@ public class Account {
         account = sp.getString(KET_ACCOUNT,"");
     }
 
+    public static void clear(Context context){
+        SharedPreferences sp = context.getSharedPreferences(Account.class.getName(),Context.MODE_PRIVATE);
+        sp.edit().clear().commit();
+    }
+
     public static void setPushId(String pushId){
         Account.pushId = pushId;
         Log.d("pushid", "setPushId: "+pushId);
@@ -112,4 +117,5 @@ public class Account {
     public static String getToken(){
         return token;
     }
+
 }

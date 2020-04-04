@@ -17,10 +17,7 @@ android {
                 GETUI_APP_SECRET: "yuRuq6qtFM9xXjGTFNN6Q2",
                 PACKAGE_NAME    : applicationId
         ]
-        ndk {
-            // 注意：这里需要添加项目所需 CPU 类型的最小集
-            abiFilters "armeabi", "armeabi-v7a", "x86_64", "x86"
-        }
+
     }
     buildTypes {
         release {

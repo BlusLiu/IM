@@ -19,7 +19,7 @@ public interface PersonalContract {
 
         void onLoadDone(User user);
         void allowSayHellow(boolean isAllow);
-
+        void allowExit(boolean isSelf);
         void setFollowStatus(boolean isFollow);
     }
 }

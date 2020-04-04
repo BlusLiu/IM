@@ -23,7 +23,7 @@ public abstract class BaseDbRepository<Data extends BaseDbModel<Data>> implement
         QueryTransaction.QueryResultListCallback<Data> {
     // 和presenter交互的回调
     private SucceedCallback<List<Data>> callback;
-    private List<Data> dataList = new LinkedList<>();
+    protected LinkedList<Data> dataList = new LinkedList<>();
     private Class<Data> dataClass;
 
     public BaseDbRepository(){
