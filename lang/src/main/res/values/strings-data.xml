@@ -7,7 +7,7 @@
     <string name="data_account_register_invalid_parameter_name">称呼不能小于2位!</string>
     <string name="data_account_update_invalid_parameter">头像和描述不能为空!</string>
     <string name="data_network_error">网络错误！</string>
-    <string name="data_upload_error">上传失败！</string>
+    <string name="data_upload_error">上传失败！使用默认头像</string>
 
 
     <string name="data_rsp_error_unknown">未知错误(ρ_・).。</string>
